@@ -8,7 +8,7 @@ This project is focused on building a Randomized Scheduling Application using fr
 
 - Intern Data Management: Storing and displaying intern data from a static JSON object.
 - Randomized Scheduling: Automatically generating schedules based on configurable rules, such as pairing interns from different cities or departments.
-- -Selection and Filtering: Users can include/exclude interns and apply filters.
+- Selection and Filtering: Users can include/exclude interns and apply filters.
 - Rule Configuration: Customize pairing rules and add new ones.
 - Manual Overrides: Adjust schedules manually if needed.
 - Edge Case Handling: Handling uneven numbers and conflicting criteria.
