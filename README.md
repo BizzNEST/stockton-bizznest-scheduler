@@ -1,6 +1,7 @@
 # Project Title
 
-A brief description of what this project does and who it's for.
+Project Name - nestHub
+Project Description - This application is a schedular for bizzNEST to pair people from different departments and locations. 
 
 ## Table of Contents
 
