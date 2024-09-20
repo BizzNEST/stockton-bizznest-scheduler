@@ -1,9 +1,9 @@
-# Project Title
+# nestHub
 
-Project Name - nestHub
-Project Description - This application is a schedular for bizzNEST to pair people from different departments and locations. 
+This application is a randomized schedular for bizzNEST to pair people from different departments and locations. 
 
 # Project Requirements
+
 This project is focused on building a Randomized Scheduling Application using frontend technologies (HTML, CSS, JavaScript). The application will allow users to group and pair interns from different locations and departments based on customizable rules. Key features include:
 
 - Intern Data Management: Storing and displaying intern data from a static JSON object.
@@ -22,12 +22,19 @@ The application is entirely frontend-based, requiring no backend, and is optimiz
 
 - [Project Title](#project-title)
 - [Table of Contents](#table-of-contents)
+- [Project Requirements](#project-requirements)
 - [Installation](#installation)
+- [Running the Project](#running-the-project)
+- [Development Process](#development-process)
 - [Usage](#usage)
 - [Features](#features)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
+
+# Project Requirements
+
+- Node.js v14+
 
 ## Installation
 
@@ -45,10 +52,19 @@ Step-by-step instructions on how to get the development environment running.
     ```sh
     npm install
     ```
-4. Run the development server:
+
+## Running the project
+
+1. Run the development server:
     ```sh
     npm start
     ```
+
+## Development Process
+
+- Create feature branch from develop
+- Implement changes and commit frequently
+- Open PR into develop when ready
 
 ## Usage
 
