@@ -1,0 +1,350 @@
+[
+    {
+        "id": 1,
+        "name": "Ali Taquie",
+        "department": "Web Development",
+        "location": "WatsonVille"
+    },
+    {
+        "id": 2,
+        "name": "Sergio Medina-Ixta",
+        "department": "Web Development",
+        "location": "WatsonVille"
+    },
+    {
+        "id": 3,
+        "name": "Yuliana Morales-Galvan",
+        "department": "Web Development",
+        "location": "WatsonVille"
+    },
+    {
+        "id": 4,
+        "name": "Joel Mariscal",
+        "department": "Web Development",
+        "location": "WatsonVille"
+    },
+    {
+        "id": 5,
+        "name": "Tyler Nguyen",
+        "department": "Web Development",
+        "location": "Stockton"
+    },
+    {
+        "id": 6,
+        "name": "Christopher Loya",
+        "department": "Web Development",
+        "location": "Stockton"
+    },
+    {
+        "id": 7,
+        "name": "Bledine Messsa Ngunte",
+        "department": "Web Development",
+        "location": "Stockton"
+    },
+    {
+        "id": 8,
+        "name": "Jose Velarde-Ruiz",
+        "department": "Web Development",
+        "location": "Modesto"
+    },
+    {
+        "id": 9,
+        "name": "Alan Buenrostro",
+        "department": "Web Development",
+        "location": "Modesto"
+    },
+    {
+        "id": 10,
+        "name": "Leo Masellis",
+        "department": "Web Development",
+        "location": "Modesto"
+    },
+    {
+        "id": 11,
+        "name": "Karl Legson",
+        "department": "Web Development",
+        "location": "Modesto"
+    },
+    {
+        "id": 12,
+        "name": "Victor Lomeli Ponce",
+        "department": "Web Development",
+        "location": "Modesto"
+    },
+    {
+        "id": 13,
+        "name": "Adrean Cajigas",
+        "department": "Web Development",
+        "location": "Modesto"
+    },
+    {
+        "id": 14,
+        "name": "Eli Manzo",
+        "department": "Web Development",
+        "location": "Salinas"
+    },
+    {
+        "id": 15,
+        "name": "Liliana Constantino",
+        "department": "Web Development",
+        "location": "Salinas"
+    },
+    {
+        "id": 16,
+        "name": "Jacqueline Perez",
+        "department": "Web Development",
+        "location": "Salinas"
+    },
+    {
+        "id": 17,
+        "name": "Alonzo Cabrera",
+        "department": "Web Development",
+        "location": "Salinas"
+    },
+    {
+        "id": 18,
+        "name": "Youssef Bazzi",
+        "department": "Web Development",
+        "location": "Gilroy"
+    },
+    {
+        "id": 19,
+        "name": "Lisandro Jimenez",
+        "department": "Web Development",
+        "location": "Gilroy"
+    },
+    {
+        "id": 20,
+        "name": "Ian Ellis",
+        "department": "Web Development",
+        "location": "Gilroy"
+    },
+    {
+        "id": 21,
+        "name": "Fatima Perez",
+        "department": "Design",
+        "location": "Modesto"
+    },
+    {
+        "id": 22,
+        "name": "Seneca Rubianes",
+        "department": "Design",
+        "location": "Modesto"
+    },
+    {
+        "id": 23,
+        "name": "Carmen Trujillo",
+        "department": "Design",
+        "location": "Modesto"
+    },
+    {
+        "id": 24,
+        "name": "Andrew Eversley",
+        "department": "Design",
+        "location": "Modesto"
+    },
+    {
+        "id": 25,
+        "name": "Nazgol Ghafourian",
+        "department": "Design",
+        "location": "Modesto"
+    },
+    {
+        "id": 26,
+        "name": "Nat Talaid",
+        "department": "Design",
+        "location": "Stockton"
+    },
+    {
+        "id": 27,
+        "name": "Thalia Gu",
+        "department": "Design",
+        "location": "Stockton"
+    },
+    {
+        "id": 28,
+        "name": "Gianelli Liguidliuid",
+        "department": "Design",
+        "location": "Stockton"
+    },
+    {
+        "id": 29,
+        "name": "Sebi Perry",
+        "department": "Design",
+        "location": "Watsonville"
+    },
+    {
+        "id": 30,
+        "name": "Ryan Janowitz",
+        "department": "Design",
+        "location": "Watsonville"
+    },
+    {
+        "id": 31,
+        "name": "Mirna Gonzalez",
+        "department": "Design",
+        "location": "Watsonville"
+    },
+    {
+        "id": 32,
+        "name": "Nancy Cervantes-Herrera",
+        "department": "Design",
+        "location": "Watsonville"
+    },
+    {
+        "id": 33,
+        "name": "Yadriel Pareja",
+        "department": "Design",
+        "location": "Gilroy"
+    },
+    {
+        "id": 34,
+        "name": "Princess Rodriguez",
+        "department": "Design",
+        "location": "Gilroy"
+    },
+    {
+        "id": 35,
+        "name": "Milagros Perez",
+        "department": "Design",
+        "location": "Gilroy"
+    },
+    {
+        "id": 36,
+        "name": "Xavier Cruz",
+        "department": "Design",
+        "location": "Salinas"
+    },
+    {
+        "id": 37,
+        "name": "Alexa Zavala",
+        "department": "Design",
+        "location": "Salinas"
+    },
+    {
+        "id": 38,
+        "name": "Emma Griffin-Ortiz",
+        "department": "Design",
+        "location": "Salinas"
+    },
+    {
+        "id": 39,
+        "name": "Cristian Reyes",
+        "department": "Design",
+        "location": "Salinas"
+    },
+    {
+        "id": 40,
+        "name": "Lizeth Villareal",
+        "department": "Video",
+        "location": "Watsonville"
+    },
+    {
+        "id": 41,
+        "name": "Ivan Ramirez",
+        "department": "Video",
+        "location": "Watsonville"
+    },
+    {
+        "id": 42,
+        "name": "Julian Guerrero",
+        "department": "Video",
+        "location": "Watsonville"
+    },
+    {
+        "id": 43,
+        "name": "Dominic Morales",
+        "department": "Video",
+        "location": "Watsonville"
+    },
+    {
+        "id": 44,
+        "name": "Luis Perez",
+        "department": "Video",
+        "location": "Watsonville"
+    },
+    {
+        "id": 45,
+        "name": "Rogelio Valdez-Perez",
+        "department": "Video",
+        "location": "Watsonville"
+    },
+    {
+        "id": 46,
+        "name": "Melanie Torres",
+        "department": "Video",
+        "location": "Watsonville"
+    },
+    {
+        "id": 47,
+        "name": "Emily Ramirez",
+        "department": "Video",
+        "location": "Watsonville"
+    },
+    {
+        "id": 48,
+        "name": "Josh Matadamas",
+        "department": "Video",
+        "location": "Salinas"
+    },
+    {
+        "id": 49,
+        "name": "Julia Ruiz",
+        "department": "Video",
+        "location": "Salinas"
+    },
+    {
+        "id": 50,
+        "name": "Emiliano Margarito",
+        "department": "Video",
+        "location": "Salinas"
+    },
+    {
+        "id": 51,
+        "name": "Elijah Younger",
+        "department": "Video",
+        "location": "Salinas"
+    },
+    {
+        "id": 52,
+        "name": "Lesly Vargas",
+        "department": "Video",
+        "location": "Salinas"
+    },
+    {
+        "id": 53,
+        "name": "Natalia Rodas",
+        "department": "Video",
+        "location": "Salinas"
+    },
+    {
+        "id": 54,
+        "name": "Nicolas Biala",
+        "department": "Video",
+        "location": "Salinas"
+    },
+    {
+        "id": 55,
+        "name": "Talia Mendoza",
+        "department": "Video",
+        "location": "Salinas"
+    },
+    {
+        "id": 56,
+        "name": "Maribel Garcia",
+        "department": "Marketing",
+        "location": "Modesto"
+    },
+    {
+        "id": 57,
+        "name": "Fernanda Jordan",
+        "department": "Marketing",
+        "location": "Watsonville"
+    },
+    {
+        "id": 58,
+        "name": "Elissa Covarrubias",
+        "department": "Marketing",
+        "location": "Salinas"
+    }
+]
