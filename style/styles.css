@@ -29,6 +29,11 @@ html, body {
     padding-top: 100px;
 }
 
+.bizzNESTLogoStyle img {
+    max-width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
 .landingBackgroundImage {
     background: url(../assets/HomePageBackground.png) no-repeat center center fixed;
     background-size: cover;
@@ -131,4 +136,64 @@ html, body {
     padding: 27px 50px;
 }
 
+@media (max-width: 768px) {
+    .bizzNESTHeader {
+        font-size: 36px;
+        margin-top: 50px;
+    }
 
+    .bizzNESTSubText {
+        font-size: 16px;
+        margin: 0px 6px;
+    }
+
+    .buttonMainStyle {
+        padding: 20px 40px;
+        font-size: 20px;
+    }
+
+    .modalComponent {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .topTextHeader {
+        font-size: 32px;
+    }
+    .bizzNESTLogoStyle img {
+        max-width: 60%; /* Smaller for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .bizzNESTHeader {
+        font-size: 28px;
+        margin: 30px;
+    }
+
+    .bizzNESTSubText {
+        font-size: 14px;
+        margin: 0px 6px;
+    }
+
+    .buttonMainStyle {
+        padding: 15px 30px;
+        font-size: 18px;
+    }
+
+    .modalComponent {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .topTextHeader {
+        font-size: 24px;
+    }
+
+    .footerContainer {
+        padding: 15px 20px;
+    }
+    .bizzNESTLogoStyle img {
+        max-width: 50%; /* Even smaller for phones */
+    }
+}
