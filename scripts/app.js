@@ -3,7 +3,6 @@ const startPairingButton = document.getElementById("startPairingButton");
 const closeModalButton = document.getElementById("closeModalButton");
 const tableBody = document.getElementById("tableBody");
 
-
 closeModalButton.addEventListener("click", () => {
     modalComponentID.classList.add("hidden");
 });
@@ -23,6 +22,8 @@ const loadInterns = async () => {
     const interns = await apiFetch();
     
     const filterInterns = interns.splice(0,10);
+
+    tableBody.innerHTML = '';
 
     filterInterns.forEach(intern => {
         const row = document.createElement("tr");
