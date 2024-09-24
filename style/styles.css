@@ -131,6 +131,41 @@ html, body {
     display: none;
 }
 
+.mainTableContainer {
+    width: 100%;
+    text-align: center;
+    border: solid 2px #309C68;
+    border-radius: 5px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
+
+.tableHeaderStyling {
+    font-family: Lato-Regular;
+    color: white;
+}
+
+.tableHeaderStyling th {
+    background-color: #79C8A3;
+    padding: 13px; 
+    margin: 0;
+    border: none;
+}
+
+.tableHeaderStyling th:first-child {
+    border-top-left-radius: 3px;
+}
+
+.tableHeaderStyling th:last-child {
+    border-top-right-radius: 3px;
+}
+
+tbody td {
+    padding: 10px;
+    border: 1px solid #79C8A3;
+}
+
 .footerContainer {
     background-color: white;
     padding: 27px 50px;
