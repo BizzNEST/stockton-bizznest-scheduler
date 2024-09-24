@@ -49,6 +49,7 @@ html, body {
     font-size: 20px;
     margin: 0px;
 }
+
 .buttonContainer{
     display: flex;
     justify-content: center;
@@ -66,6 +67,7 @@ html, body {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
     cursor: pointer;
 }
+
 .buttonMainStyle:hover{
     background-color: #d12d9d;
 }
