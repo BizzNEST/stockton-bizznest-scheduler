@@ -21,7 +21,7 @@
         </div>
 
         <div class="buttonContainer">
-            <button class="buttonMainStyle">
+            <button class="buttonMainStyle" id="startPairingButton">
                 Start Pairing
             </button>
         </div>
@@ -31,6 +31,32 @@
         testing
     </div>
 
+    <div class="modalComponentBackground hidden" id="modalComponentID">
+        <div class="modalComponent">
+            <div class="topModalHeader">
+                <p class="topTextHeader">Filter</p>
+                <img class="closeButtonStyling" src="./assets/xButton.png" alt="Close Button" id="closeModalButton">
+            </div>
+            <div class="filterContainer">
+                <div>
+                    <select name="deparment" id="deparments">
+                        <option value="Testing">Testing</option>
+                        <option value="Testing">Testing</option>
+                        <option value="Testing">Testing</option>
+                        <option value="Testing">Testing</option>
+                    </select>
+
+                    <select name="location" id="locations">
+                        <option value="Testing">Testing</option>
+                        <option value="Testing">Testing</option>
+                        <option value="Testing">Testing</option>
+                        <option value="Testing">Testing</option>
+                    </select>
+                </div>
+                <input type="text">
+            </div>
+        </div>
+    </div>
     <script src="./scripts/app.js"></script>
 </body>
 
