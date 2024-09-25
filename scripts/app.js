@@ -5,12 +5,12 @@ const tableBody = document.getElementById("tableBody");
 const currentPageNumber = document.getElementById("currentPageNumber");
 const prevPageButton = document.getElementById("prevPageButton");
 const nextPageButton = document.getElementById("nextPageButton");
+const selectAllButton = document.getElementById("selectAllButton");
+const deselectAllButton = document.getElementById("deselectAllButton");
 
 let currentPage = 1;
 let interns = [];
 let pageSize = 8;
-const selectAllButton = document.getElementById("selectAllButton");
-const deselectAllButton = document.getElementById("deselectAllButton");
 
 closeModalButton.addEventListener("click", () => {
     modalComponentID.classList.add("hidden");
