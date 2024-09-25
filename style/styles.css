@@ -8,6 +8,11 @@
     font-family: Lato-Regular;
     src: url(../assets/Fonts/Lato-Regular.ttf);
 }
+
+@font-face {
+    font-family: Lato-Light;
+    src: url(../assets/Fonts/Lato-Light.ttf);
+}
 /* End of Fonts */
 
 html, body {
@@ -138,7 +143,6 @@ html, body {
     border-radius: 5px;
     border-collapse: separate;
     border-spacing: 0;
-    overflow: hidden;
 }
 
 .tableHeaderStyling {
@@ -162,10 +166,33 @@ html, body {
 }
 
 tbody td {
+    font-family: Lato-Light;
+    font-family: 18px;
     padding: 10px;
     border: 1px solid #79C8A3;
 }
 
+.paginationContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrowIconStyle{
+    height: 24px;
+    width: 24px;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.paginationText{
+    font-size: 20px;
+    font-family: Lato-Bold;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 .footerContainer {
     background-color: white;
     padding: 27px 50px;

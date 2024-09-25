@@ -30,7 +30,7 @@
     <div class="footerContainer">
         testing
     </div>
-
+<!-- Modal Component -->
     <div class="modalComponentBackground hidden" id="modalComponentID">
         <div class="modalComponent">
             <div class="topModalHeader">
@@ -70,12 +70,23 @@
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        
                     </tbody>
                 </table>
             </div>
+
+            <div class="paginationContainer">
+                <button class="arrowIconStyle" id="prevPageButton" disabled>
+                    <img src="./assets/leftArrowIcon.png" alt="Left Arrow">
+                </button>
+                <p class="paginationText" id="currentPageNumber">1</p>
+                <button class="arrowIconStyle" id="nextPageButton">
+                    <img src="./assets/rightArrowIcon.png" alt="Right Arrow">
+                </button>
+            </div>
         </div>
     </div>
+    <!--End of Modal Component -->
+
     <script src="./scripts/app.js"></script>
 </body>
 
