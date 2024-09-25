@@ -100,6 +100,7 @@ html, body {
     padding: 30px;
     position: relative;
     max-height: 90vh;
+    overflow-y: auto;
     width: 618px;
     border-radius: 20px;
     box-shadow: 0px 0px 40px 5px rgba(0, 0, 0, 0.25);
@@ -176,6 +177,9 @@ tbody td {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-grow: 1;
+    padding-left: 8rem;
+
 }
 
 .arrowIconStyle{
@@ -193,6 +197,32 @@ tbody td {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.paginationAndSave{
+    padding: 0;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.saveButtonStyle{
+    font-size: 20px;
+    font-family: Lato-Bold;
+    padding: 13px 55px;
+    color: white;
+    background-color: #309C68;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.saveButtonStyle:hover{
+    background-color: #79C8A3;
+}
+
 .footerContainer {
     background-color: white;
     padding: 27px 50px;
