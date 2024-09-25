@@ -143,7 +143,6 @@ html, body {
     border-radius: 5px;
     border-collapse: separate;
     border-spacing: 0;
-    overflow: hidden;
 }
 
 .tableHeaderStyling {

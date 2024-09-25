@@ -8,7 +8,7 @@ const nextPageButton = document.getElementById("nextPageButton");
 
 let currentPage = 1;
 let interns = [];
-let pageSize = 10;
+let pageSize = 8;
 const selectAllButton = document.getElementById("selectAllButton");
 const deselectAllButton = document.getElementById("deselectAllButton");
 
@@ -97,7 +97,6 @@ const loadInterns = () => {
             checkbox.dispatchEvent(new Event('change'));
         });
     });
-    
     
     deselectAllButton.addEventListener("click", () => {
         const checkboxes = document.querySelectorAll('#tableBody input[type="checkbox"]');
