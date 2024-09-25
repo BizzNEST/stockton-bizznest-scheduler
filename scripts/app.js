@@ -55,24 +55,22 @@ const loadInterns = () => {
         const checkCol = document.createElement("td");
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.checked = selectedInterns[start + index] || false;
+        const internIndex = start + index;
+        checkbox.checked = selectedInterns[internIndex] || false;
         checkbox.addEventListener("change", () => {
             if (checkbox.checked) {
-                selectedInterns[start + index] = true;
+                selectedInterns[internIndex] = true;
+                row.style.backgroundColor = 'rgba(121, 200, 163, 0.4)';
             } else {
-                delete selectedInterns[start + index];
+                delete selectedInterns[internIndex];
+                row.style.backgroundColor = '';
             }
             sessionStorage.setItem("selected", JSON.stringify(selectedInterns));
         });
 
-        checkbox.addEventListener('change', () => {
-            if (checkbox.checked) {
-                row.style.backgroundColor = 'rgba(121, 200, 163, 0.4)'; // Change to green if checked
-            } else {
-                row.style.backgroundColor = ''; // Reset background if unchecked
-            }
-        });
-
+        if (checkbox.checked) {
+            row.style.backgroundColor = 'rgba(121, 200, 163, 0.4)';
+        }
         checkCol.appendChild(checkbox);
         
         const nameCol = document.createElement("td");
@@ -92,17 +90,33 @@ const loadInterns = () => {
         tableBody.appendChild(row);
     });
 
+    
     selectAllButton.addEventListener("click", () => {
+        
+        interns.forEach((intern, index) => {
+            selectedInterns[index] = true;
+        });
+        sessionStorage.setItem("selected", JSON.stringify(selectedInterns));
+
+        
         const checkboxes = document.querySelectorAll('#tableBody input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
+        checkboxes.forEach((checkbox) => {
             checkbox.checked = true;
             checkbox.dispatchEvent(new Event('change'));
         });
     });
     
+    
     deselectAllButton.addEventListener("click", () => {
+        
+        interns.forEach((intern, index) => {
+            delete selectedInterns[index];
+        });
+        sessionStorage.setItem("selected", JSON.stringify(selectedInterns));
+
+        
         const checkboxes = document.querySelectorAll('#tableBody input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
+        checkboxes.forEach((checkbox) => {
             checkbox.checked = false;
             checkbox.dispatchEvent(new Event('change'));
         });
