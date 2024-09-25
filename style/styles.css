@@ -223,6 +223,85 @@ tbody td {
     background-color: #79C8A3;
 }
 
+.buttonsAndCheckBoxContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.checkboxContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    gap: 5px;
+    font-family: Lato-Regular;
+    font-size: 13px;
+}
+
+.checkboxDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 37px;
+    height: 19px;
+    border: none;
+    border-radius: 19px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #D4D4D4;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 11px;
+    width: 11px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #FFFFFF;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #d12d9d;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #FFFFFF;
+}
+
+input:checked + .slider:before {
+    transform: translateX(16px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
 .footerContainer {
     display: flex;
     justify-content: space-between;
