@@ -2,6 +2,8 @@ const modalComponentID = document.getElementById("modalComponentID");
 const startPairingButton = document.getElementById("startPairingButton");
 const closeModalButton = document.getElementById("closeModalButton");
 const tableBody = document.getElementById("tableBody");
+const selectAllButton = document.getElementById("selectAllButton");
+const deselectAllButton = document.getElementById("deselectAllButton");
 
 closeModalButton.addEventListener("click", () => {
     modalComponentID.classList.add("hidden");
@@ -31,6 +33,15 @@ const loadInterns = async () => {
         const checkCol = document.createElement("td");
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
+
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                row.style.backgroundColor = 'rgba(121, 200, 163, 0.4)'; // Change to green if checked
+            } else {
+                row.style.backgroundColor = ''; // Reset background if unchecked
+            }
+        });
+
         checkCol.appendChild(checkbox);
         
         const nameCell = document.createElement("td");
@@ -48,5 +59,22 @@ const loadInterns = async () => {
         row.appendChild(locationCol);
 
         tableBody.appendChild(row);
+    });
+
+    selectAllButton.addEventListener("click", () => {
+        const checkboxes = document.querySelectorAll('#tableBody input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = true;
+            checkbox.dispatchEvent(new Event('change'));
+        });
+    });
+    
+    
+    deselectAllButton.addEventListener("click", () => {
+        const checkboxes = document.querySelectorAll('#tableBody input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+            checkbox.dispatchEvent(new Event('change'));
+        });
     });
 }

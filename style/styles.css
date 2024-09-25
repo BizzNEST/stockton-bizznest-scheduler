@@ -171,6 +171,59 @@ tbody td {
     padding: 27px 50px;
 }
 
+input[type="checkbox"] {
+    width: 25px; /* Adjust the size */
+    height: 25px; /* Adjust the size */
+    appearance: none; /* Remove default checkbox styling */
+    background-color: #79C8A3; /* Box color */
+    border: 2px solid #309C68; /* Border color */
+    border-radius: 4px; /* Optional: rounded corners */
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+/* Style for when checkbox is checked */
+input[type="checkbox"]:checked {
+    background-color: #309C68; /* Green with 40% opacity */
+}
+
+input[type="checkbox"]:checked::after {
+    content: '✖'; /* Unicode character for checkmark */
+    color: black; /* Checkmark color */
+    font-size: 20px; /* Size of the checkmark */
+    position: absolute; /* Position the checkmark */
+    top: 0; /* Center vertically */
+    left: 2px; /* Center horizontally */
+}
+
+.buttonSelectStyle {
+    width: 144px;
+    height: 45px;
+    background-color: #BA2C8E;
+    color: white;
+    font-family: Lato-Bold;
+    border-radius: 5px;
+    margin: 10px 5px 10px 0px;
+    border: none;
+    outline: none;
+    font-size: 13px;
+
+}
+
+.buttonDeselectStyle {
+    width: 144px;
+    height: 45px;
+    background-color: white;
+    color: #BA2C8E;
+    font-family: Lato-Regular;
+    border-radius: 5px;
+    margin: 10px 5px 10px 0px;
+    border: 2px solid #BA2C8E;
+    outline: none;
+    font-size: 13px;
+}
+
 @media (max-width: 768px) {
     .bizzNESTHeader {
         font-size: 36px;
