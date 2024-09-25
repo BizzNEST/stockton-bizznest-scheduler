@@ -14,10 +14,12 @@ let pageSize = 8;
 
 closeModalButton.addEventListener("click", () => {
     modalComponentID.classList.add("hidden");
+    currentPage = 1;
 });
 
 startPairingButton.addEventListener("click", () => {
     modalComponentID.classList.remove("hidden");
+    currentPage = 1;
     loadItems();
 });
 
