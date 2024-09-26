@@ -42,20 +42,35 @@
                 <img class="closeButtonStyling" src="./assets/xButton.png" alt="Close Button" id="closeModalButton">
             </div>
             <div class="filterContainer">
-                <div>
-                    <select name="deparment" id="deparments">
-                        <option value="Testing">Testing</option>
-                        <option value="Testing">Testing</option>
-                        <option value="Testing">Testing</option>
-                        <option value="Testing">Testing</option>
-                    </select>
-
-                    <select name="location" id="locations">
-                        <option value="Testing">Testing</option>
-                        <option value="Testing">Testing</option>
-                        <option value="Testing">Testing</option>
-                        <option value="Testing">Testing</option>
-                    </select>
+                <div class="filterContainer">
+                    <div class="dropdown">
+                        <button id="dropdownButton1" class="dropdownButton">
+                            <span class="button-text">Departments</span>
+                            <span class="dropdown-icon">&#9662;</span> 
+                        </button>
+                        <div id="departments" class="dropdown-content">
+                            <label><input type="checkbox" value="Department"> All</label>
+                            <label><input type="checkbox" value="Web Development"> Web Development</label>
+                            <label><input type="checkbox" value="Marketing"> Marketing</label>
+                            <label><input type="checkbox" value="Video"> Video</label>
+                            <label><input type="checkbox" value="Design"> Design</label>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown">
+                        <button id="dropdownButton2" class="dropdownButton">
+                            <span class="button-text">Locations</span>
+                            <span class="dropdown-icon">&#9662;</span> 
+                        </button>
+                        <div id="locations" class="dropdown-content">
+                            <label><input type="checkbox" value="Location"> All</label>
+                            <label><input type="checkbox" value="Modesto"> Modesto</label>
+                            <label><input type="checkbox" value="Salinas"> Salinas</label>
+                            <label><input type="checkbox" value="Stockton"> Stockton</label>
+                            <label><input type="checkbox" value="Gilroy"> Gilroy</label>
+                            <label><input type="checkbox" value="Watsonville"> Watsonville</label>
+                        </div>
+                    </div>
                 </div>
                 <input type="text" placeholder="Search">
             </div>
