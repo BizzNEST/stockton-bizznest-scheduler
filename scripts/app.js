@@ -35,10 +35,9 @@ const loadItems = async () => {
 };
 
 const loadInterns = () => {
-    tableBody.innerHTML = '';
+    tableBody.innerHTML = "";
 
     const totalPages = Math.ceil(interns.length / pageSize);
-    
     if (currentPage > totalPages) {
         currentPage = totalPages;
     }
@@ -49,36 +48,35 @@ const loadInterns = () => {
 
     const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
 
-    filteredInterns.forEach((intern, index) => {
+    filteredInterns.forEach((intern) => {
         const row = document.createElement("tr");
 
         const checkCol = document.createElement("td");
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        const internIndex = start + index;
-        checkbox.checked = selectedInterns[internIndex] || false;
+        checkbox.checked = selectedInterns[intern.id] || false;
         checkbox.addEventListener("change", () => {
             if (checkbox.checked) {
-                selectedInterns[internIndex] = true;
-                row.style.backgroundColor = 'rgba(121, 200, 163, 0.4)';
+                selectedInterns[intern.id] = true;
+                row.style.backgroundColor = "rgba(121, 200, 163, 0.4)";
             } else {
-                delete selectedInterns[internIndex];
-                row.style.backgroundColor = '';
+                delete selectedInterns[intern.id];
+                row.style.backgroundColor = "";
             }
             sessionStorage.setItem("selected", JSON.stringify(selectedInterns));
         });
 
         if (checkbox.checked) {
-            row.style.backgroundColor = 'rgba(121, 200, 163, 0.4)';
+            row.style.backgroundColor = "rgba(121, 200, 163, 0.4)";
         }
         checkCol.appendChild(checkbox);
-        
+
         const nameCol = document.createElement("td");
         nameCol.textContent = intern.name;
-        
+
         const departCol = document.createElement("td");
         departCol.textContent = intern.department;
-        
+
         const locationCol = document.createElement("td");
         locationCol.textContent = intern.location;
 
@@ -90,35 +88,43 @@ const loadInterns = () => {
         tableBody.appendChild(row);
     });
 
-    
     selectAllButton.addEventListener("click", () => {
-        
-        interns.forEach((intern, index) => {
-            selectedInterns[index] = true;
+        interns.forEach((intern) => {
+            selectedInterns[intern.id] = true;
         });
         sessionStorage.setItem("selected", JSON.stringify(selectedInterns));
 
-        
-        const checkboxes = document.querySelectorAll('#tableBody input[type="checkbox"]');
+        const checkboxes = document.querySelectorAll(
+            '#tableBody input[type="checkbox"]'
+        );
         checkboxes.forEach((checkbox) => {
             checkbox.checked = true;
-            checkbox.dispatchEvent(new Event('change'));
+            checkbox.dispatchEvent(new Event("change"));
+        });
+
+        const rows = tableBody.querySelectorAll("tr");
+        rows.forEach((row) => {
+            row.style.backgroundColor = "rgba(121, 200, 163, 0.4)";
         });
     });
-    
-    
+
     deselectAllButton.addEventListener("click", () => {
-        
-        interns.forEach((intern, index) => {
-            delete selectedInterns[index];
+        interns.forEach((intern) => {
+            delete selectedInterns[intern.id];
         });
         sessionStorage.setItem("selected", JSON.stringify(selectedInterns));
 
-        
-        const checkboxes = document.querySelectorAll('#tableBody input[type="checkbox"]');
+        const checkboxes = document.querySelectorAll(
+            '#tableBody input[type="checkbox"]'
+        );
         checkboxes.forEach((checkbox) => {
             checkbox.checked = false;
-            checkbox.dispatchEvent(new Event('change'));
+            checkbox.dispatchEvent(new Event("change"));
+        });
+
+        const rows = tableBody.querySelectorAll("tr");
+        rows.forEach((row) => {
+            row.style.backgroundColor = "";
         });
     });
 
@@ -135,8 +141,10 @@ prevPageButton.addEventListener("click", () => {
 });
 
 nextPageButton.addEventListener("click", () => {
-    if ((currentPage * pageSize) < interns.length) {
+    if (currentPage * pageSize < interns.length) {
         currentPage++;
         loadInterns();
     }
 });
+
+loadItems();
