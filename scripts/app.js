@@ -7,6 +7,8 @@ const prevPageButton = document.getElementById("prevPageButton");
 const nextPageButton = document.getElementById("nextPageButton");
 const selectAllButton = document.getElementById("selectAllButton");
 const deselectAllButton = document.getElementById("deselectAllButton");
+const departmentDropdown = document.getElementById("departments");
+const locationDropdown = document.getElementById("locations");
 
 let currentPage = 1;
 let interns = [];
@@ -34,10 +36,6 @@ const loadItems = async () => {
     loadInterns();
 };
 
-
-
-const departmentDropdown = document.getElementById("departments");
-const locationDropdown = document.getElementById("locations");
 
 // Function to update the checkbox selection state
 const updateDropdownCheckboxes = (checkboxes, selectedItems) => {
@@ -68,83 +66,145 @@ const setupDropdownToggle = (buttonId, contentId) => {
     });
 };
 
-// Setup dropdown toggle for departments
+// Setup dropdown toggle for departments & locations
 setupDropdownToggle('dropdownButton1', 'departments');
-
-// Setup dropdown toggle for locations
 setupDropdownToggle('dropdownButton2', 'locations');
 
-// Example usage for departments
-const departmentCheckboxes = document.querySelectorAll('#departments input[type="checkbox"]');
 let selectedDepartments = [];
-
-
-// Example usage for locations
-const locationCheckboxes = document.querySelectorAll('#locations input[type="checkbox"]');
 let selectedLocations = [];
 
+// Fetch departments data
+const fetchDepartments = async () => {
+    const response = await fetch('./seedata/departments.json');
+    const departments = await response.json();
+    return departments;
+};
 
-// Event listeners for checkbox changes
-departmentCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        const value = checkbox.value;
+// Fetch locations data
+const fetchLocations = async () => {
+    const response = await fetch('./seedata/locations.json');
+    const locations = await response.json();
+    return locations;
+};
 
-        if (value === "Department") {
-            // Reset all selections if "Department" is checked
-            if (checkbox.checked) {
-                selectedDepartments = []; // Keep only "Department"
-                departmentCheckboxes.forEach(cb => {
-                    if (cb.value !== "Department") {    
-                        cb.checked = false; // Uncheck other boxes
-                    }
-                });
-            }
-        } else {
-            // Handle regular department selections
-            if (checkbox.checked) {
-                if (!selectedDepartments.includes(value)) {
-                    selectedDepartments.push(value);
+// Generate department checkboxes dynamically
+const generateDepartmentCheckboxes = async () => {
+    const departments = await fetchDepartments();
+
+    // Create "All" checkbox
+    const allLabel = document.createElement('label');
+    const allCheckbox = document.createElement('input');
+    allCheckbox.type = 'checkbox';
+    allCheckbox.value = 'Department';
+    allLabel.appendChild(allCheckbox);
+    allLabel.appendChild(document.createTextNode(' All'));
+    departmentDropdown.appendChild(allLabel);
+
+    // Create checkboxes for each department
+    departments.forEach(department => {
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = department;
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(` ${department}`));
+        departmentDropdown.appendChild(label);
+    });
+
+    // Attach event listeners for the new checkboxes
+    const departmentCheckboxes = document.querySelectorAll('#departments input[type="checkbox"]');
+    departmentCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const value = checkbox.value;
+
+            if (value === "Department") {
+                // Reset all selections if "All" is checked
+                if (checkbox.checked) {
+                    selectedDepartments = [];
+                    departmentCheckboxes.forEach(cb => {
+                        if (cb.value !== "Department") {
+                            cb.checked = false; // Uncheck other boxes
+                        }
+                    });
                 }
             } else {
-                selectedDepartments = selectedDepartments.filter(item => item !== value);
-            }
-        }
-
-        updateDropdownCheckboxes(departmentCheckboxes, selectedDepartments);
-        loadInterns(); // Uncomment if needed
-    });
-});
-
-// Event listener for the location dropdown
-locationCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        const value = checkbox.value;
-
-        if (value === "Location") {
-            // Reset all selections if "Location" is checked
-            if (checkbox.checked) {
-                selectedLocations = []; // Keep only "Location"
-                locationCheckboxes.forEach(cb => {
-                    if (cb.value !== "Location") {    
-                        cb.checked = false; // Uncheck other boxes
+                // Handle regular department selections
+                if (checkbox.checked) {
+                    if (!selectedDepartments.includes(value)) {
+                        selectedDepartments.push(value);
                     }
-                });
+                } else {
+                    selectedDepartments = selectedDepartments.filter(item => item !== value);
+                }
             }
-        } else {
-            // Handle regular location selections
-            if (checkbox.checked) {
-                if (!selectedLocations.includes(value)) {
-                    selectedLocations.push(value);
+
+            updateDropdownCheckboxes(departmentCheckboxes, selectedDepartments);
+            loadInterns();
+        });
+    });
+};
+
+// Generate location checkboxes dynamically
+const generateLocationCheckboxes = async () => {
+    const locations = await fetchLocations();
+    const locationDropdown = document.getElementById('locations');
+
+    // Create "All" checkbox
+    const allLabel = document.createElement('label');
+    const allCheckbox = document.createElement('input');
+    allCheckbox.type = 'checkbox';
+    allCheckbox.value = 'Location';
+    allLabel.appendChild(allCheckbox);
+    allLabel.appendChild(document.createTextNode(' All'));
+    locationDropdown.appendChild(allLabel);
+
+    // Create checkboxes for each location
+    locations.forEach(location => {
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = location;
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(` ${location}`));
+        locationDropdown.appendChild(label);
+    });
+
+    // Attach event listeners for the new checkboxes
+    const locationCheckboxes = document.querySelectorAll('#locations input[type="checkbox"]');
+    locationCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const value = checkbox.value;
+
+            if (value === "Location") {
+                // Reset all selections if "All" is checked
+                if (checkbox.checked) {
+                    selectedLocations = []; 
+                    locationCheckboxes.forEach(cb => {
+                        if (cb.value !== "Location") {
+                            cb.checked = false; // Uncheck other boxes
+                        }
+                    });
                 }
             } else {
-                selectedLocations = selectedLocations.filter(item => item !== value);
+                // Handle regular location selections
+                if (checkbox.checked) {
+                    if (!selectedLocations.includes(value)) {
+                        selectedLocations.push(value);
+                    }
+                } else {
+                    selectedLocations = selectedLocations.filter(item => item !== value);
+                }
             }
-        }
 
-        updateDropdownCheckboxes(locationCheckboxes, selectedLocations);
-        loadInterns(); // Uncomment if needed
+            updateDropdownCheckboxes(locationCheckboxes, selectedLocations);
+            loadInterns();
+        });
     });
-});
+};
+
+// Call the functions to generate department and location checkboxes on page load
+generateDepartmentCheckboxes();
+generateLocationCheckboxes();
 
 
 
