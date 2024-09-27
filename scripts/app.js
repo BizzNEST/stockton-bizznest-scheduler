@@ -9,21 +9,28 @@ const selectAllButton = document.getElementById("selectAllButton");
 const deselectAllButton = document.getElementById("deselectAllButton");
 const departmentDropdown = document.getElementById("departments");
 const locationDropdown = document.getElementById("locations");
+const searchInput = document.getElementById('searchInput');
 
 let currentPage = 1;
 let interns = [];
 let pageSize = 8;
+let selectedDepartments = [];
+let selectedLocations = [];
+let searchQuery = '';
 
-closeModalButton.addEventListener("click", () => {
-    modalComponentID.classList.add("hidden");
-    currentPage = 1;
-});
+// Fetch departments data
+const fetchDepartments = async () => {
+    const response = await fetch('./seedata/departments.json');
+    const departments = await response.json();
+    return departments;
+};
 
-startPairingButton.addEventListener("click", () => {
-    modalComponentID.classList.remove("hidden");
-    currentPage = 1;
-    loadItems();
-});
+// Fetch locations data
+const fetchLocations = async () => {
+    const response = await fetch('./seedata/locations.json');
+    const locations = await response.json();
+    return locations;
+};
 
 const apiFetch = async () => {
     const promise = await fetch("./seedata/interns.json");
@@ -36,6 +43,17 @@ const loadItems = async () => {
     loadInterns();
 };
 
+// Filter function to show/hide rows based on search query
+const filterTable = (query) => {
+    searchQuery = query;
+    loadInterns();
+};
+
+// Add search input event listener
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    filterTable(query);
+});
 
 // Function to update the checkbox selection state
 const updateDropdownCheckboxes = (checkboxes, selectedItems) => {
@@ -69,23 +87,6 @@ const setupDropdownToggle = (buttonId, contentId) => {
 // Setup dropdown toggle for departments & locations
 setupDropdownToggle('dropdownButton1', 'departments');
 setupDropdownToggle('dropdownButton2', 'locations');
-
-let selectedDepartments = [];
-let selectedLocations = [];
-
-// Fetch departments data
-const fetchDepartments = async () => {
-    const response = await fetch('./seedata/departments.json');
-    const departments = await response.json();
-    return departments;
-};
-
-// Fetch locations data
-const fetchLocations = async () => {
-    const response = await fetch('./seedata/locations.json');
-    const locations = await response.json();
-    return locations;
-};
 
 // Generate department checkboxes dynamically
 const generateDepartmentCheckboxes = async () => {
@@ -206,19 +207,24 @@ const generateLocationCheckboxes = async () => {
 generateDepartmentCheckboxes();
 generateLocationCheckboxes();
 
-
-
 const loadInterns = () => {
     tableBody.innerHTML = "";
 
     let filteredInterns = interns;
 
-    if (selectedDepartments.length > 0) {
-        filteredInterns = filteredInterns.filter(intern => selectedDepartments.includes(intern.department));
-    }
+    if (searchQuery) {
+        filteredInterns = filteredInterns.filter(intern => {
+            const [firstName, lastName] = intern.name.toLowerCase().split(' ');
+            return firstName.startsWith(searchQuery) || lastName.startsWith(searchQuery) || intern.name.toLowerCase().startsWith(searchQuery);
+        });
+    } else {
+        if (selectedDepartments.length > 0) {
+            filteredInterns = filteredInterns.filter(intern => selectedDepartments.includes(intern.department));
+        }
 
-    if (selectedLocations.length > 0) {
-        filteredInterns = filteredInterns.filter(intern => selectedLocations.includes(intern.location));
+        if (selectedLocations.length > 0) {
+            filteredInterns = filteredInterns.filter(intern => selectedLocations.includes(intern.location));
+        }
     }
 
     if (filteredInterns.length === 0) {
@@ -335,6 +341,17 @@ nextPageButton.addEventListener("click", () => {
         currentPage++;
         loadInterns();
     }
+});
+
+closeModalButton.addEventListener("click", () => {
+    modalComponentID.classList.add("hidden");
+    currentPage = 1;
+});
+
+startPairingButton.addEventListener("click", () => {
+    modalComponentID.classList.remove("hidden");
+    currentPage = 1;
+    loadItems();
 });
 
 loadItems();
