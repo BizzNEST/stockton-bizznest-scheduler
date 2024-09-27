@@ -238,7 +238,7 @@ const loadInterns = () => {
 
     const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
 
-    paginatedInterns.forEach((intern, index) => {
+    paginatedInterns.forEach((intern) => {
         const row = document.createElement("tr");
 
         const checkCol = document.createElement("td");
