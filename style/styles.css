@@ -166,6 +166,7 @@ header {
 .filterContainer{
     display: flex;
     justify-content: space-between;
+    gap: 10px; 
 }
 
 .hidden{
@@ -411,6 +412,62 @@ input[type="checkbox"]:checked::after {
     outline: none;
     font-size: 13px;
 }
+
+
+
+/* Style for the dropdown button */
+.dropdownButton {
+    background-color: #ffff; 
+    border: 1px solid #ccc; 
+    min-width: 130px; /* Minimum width */
+    padding: 5px 5px; 
+    text-align: left; 
+    cursor: pointer; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; /
+}
+
+/* Style for the dropdown content */
+.dropdown-content {
+    display: none; 
+    position: absolute; 
+    background-color: #f9f9f9; 
+    min-width: 130px; 
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+    z-index: 1; 
+    border-radius: 8px; 
+    border: 1px solid #ccc; 
+    
+}
+
+/* Show the dropdown content when the button is clicked */
+.dropdown-content.show {
+    display: block;
+}
+
+/* Style for the dropdown labels */
+.dropdown-content label {
+    display: flex; 
+    align-items: center;
+    cursor: pointer; 
+    font-size: 12px;
+}
+
+/* Style for the dropdown labels on hover */
+.dropdown-content label:hover {
+    background-color: #ddd; 
+}
+
+/* Style for the checkboxes */
+.dropdown-content input[type="checkbox"] {
+    width: 25px; 
+    height: 25px; 
+    margin-right: 5px; 
+    transform: scale(0.7); 
+    transform-origin: center; 
+}
+
 
 @media (max-width: 768px) {
     .bizzNESTHeader {
