@@ -288,7 +288,7 @@ const loadInterns = () => {
     });
 
     selectAllButton.addEventListener("click", () => {
-        interns.forEach((intern) => {
+        filteredInterns.forEach((intern) => {
             selectedInterns[intern.id] = true;
         });
         sessionStorage.setItem("selected", JSON.stringify(selectedInterns));
@@ -308,7 +308,7 @@ const loadInterns = () => {
     });
 
     deselectAllButton.addEventListener("click", () => {
-        interns.forEach((intern) => {
+        filteredInterns.forEach((intern) => {
             delete selectedInterns[intern.id];
         });
         sessionStorage.setItem("selected", JSON.stringify(selectedInterns));
