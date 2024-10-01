@@ -251,6 +251,9 @@ const loadInterns = () => {
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.checked = selectedInterns[intern.id] || false;
+
+        checkbox.classList.add("intern-checkbox"); 
+
         checkbox.addEventListener("change", () => {
             if (checkbox.checked) {
                 selectedInterns[intern.id] = true;

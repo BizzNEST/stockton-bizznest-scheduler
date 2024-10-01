@@ -11,7 +11,7 @@
 <body class="wrapper">
 
     <main class="landingBackgroundImage">
-        <div class="bizzNESTLogoStyle2">
+        <div class="bizzNESTLogoStyle">
             <img src="./assets/bizzNESTLogo.png" alt="bizzNESTLogoTwo">
         </div>
 
@@ -38,9 +38,12 @@
     <div class="modalComponentBackground hidden" id="modalComponentID">
         <div class="modalComponent">
             <div class="topModalHeader">
-                <p class="topTextHeader">Filter</p>
-                <img class="closeButtonStyling" src="./assets/xButton.png" alt="Close Button" id="closeModalButton">
+                <div class="headerContent">
+                    <p class="topTextHeader">Select To Not Pair</p>
+                    <img class="closeButtonStyling" src="./assets/xButton.png" alt="Close Button" id="closeModalButton">
+                </div>
             </div>
+
             <div class="filterContainer">
                 <div class="filterContainer">
                     <div class="dropdown">
@@ -59,7 +62,9 @@
                         <div id="locations" class="dropdown-content"></div>
                     </div>
                 </div>
-                <input type="text" id="searchInput" placeholder="Search interns... ">
+                <div class="searchbox-container">
+                    <input class="searchBox" type="text" id="searchInput" placeholder="Search interns...">
+                    <img src="assets/search.png" alt="Search" class="search-icon" />                </div>            
             </div>
             <div class="buttonsAndCheckBoxContainer">
                 <div>
