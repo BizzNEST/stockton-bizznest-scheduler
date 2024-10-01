@@ -39,10 +39,45 @@ html, body {
     height: auto; /* Maintain aspect ratio */
 }
 
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logoContainer img {
+    width: 200px; /* Adjust size as necessary */
+    height: auto;
+    margin-left: 62px;
+    margin-top: 37px;
+}
+
+.pairingBackgroundImage {
+    padding-top: 80px; /* Adjust padding to avoid overlapping with the header */
+}
+
+
 .landingBackgroundImage {
     background: url(../assets/HomePageBackground.png) no-repeat center center fixed;
     background-size: cover;
     flex-grow: 1;
+}
+
+.pairingBackgroundImage {
+    background: url(../assets/pairingimg.png) no-repeat center center fixed;
+    background-size: cover;
+    flex-grow: 1;
+    font-family: Lato-Regular;
+}
+
+.pairingBackgroundImage h1 {
+    font-family: Lato-Regular;
+    text-align: center;
 }
 
 .bizzNESTHeader{
