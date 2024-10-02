@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", () => {
 const modalComponentID = document.getElementById("modalComponentID");
 const startPairingButton = document.getElementById("startPairingButton");
 const closeModalButton = document.getElementById("closeModalButton");
@@ -404,4 +405,8 @@ const pairInterns = () => {
 };
 departmentSwitch.addEventListener('change', pairInterns);
 locationSwitch.addEventListener('change', pairInterns);
-pairButton.addEventListener('click', pairInterns);
+pairButton.addEventListener('click', () => {
+    pairInterns();
+    window.location.href = "pairings.html";
+});
+});

@@ -59,6 +59,8 @@ header {
 
 .pairingBackgroundImage {
     padding-top: 80px; /* Adjust padding to avoid overlapping with the header */
+    padding-left: 200px; 
+    padding-right: 200px;
 }
 
 
@@ -528,6 +530,21 @@ input:checked + .slider:before {
     left: 2px;                       
 }
 
+.rowBgDarkGreen {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+}
+
+.rowBgLightGreen {
+    background-color: #79C8A3; 
+    color: black;
+    font-size: 18px;
+}
+
+.noBorder {
+    border: none !important;
+}
 
 @media (max-width: 768px) {
     .bizzNESTHeader {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bizzNEST Hub Pairings</title>
-    <link rel="stylesheet" href="./style/styles.css">
+    <link rel="stylesheet" href="../style/styles.css">
 </head>
 <body class="wrapper">
     <header>
@@ -20,7 +20,16 @@
             <input type="text" placeholder="Search">
         </div>
         <div>
-            <!-- For Table -->
+            <table class="mainTableContainer">
+                <thead class="tableHeaderStyling">
+                    <tr>
+                        <th>Groups</th>
+                        <th>Departments</th>
+                    </tr>
+                </thead>
+                <tbody id="pairTableBody">
+                </tbody>
+            </table>
         </div>
         <div class="resetAndSave">
             <button>Reset</button>
@@ -34,5 +43,6 @@
             <p class="footerText">© Copyright 2024 | Digital Nest | All Rights Reserved</p>
         </div>
     </div>
+    <script src="../scripts/pairingapp.js"></script>
 </body>
 </html>
