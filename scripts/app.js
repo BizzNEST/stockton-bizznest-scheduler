@@ -98,7 +98,7 @@ const generateDepartmentCheckboxes = async () => {
     allCheckbox.type = 'checkbox';
     allCheckbox.value = 'Department';
     allLabel.appendChild(allCheckbox);
-    allLabel.appendChild(document.createTextNode(' All'));
+    allLabel.appendChild(document.createTextNode(' Clear'));
     departmentDropdown.appendChild(allLabel);
 
     // Create checkboxes for each department
@@ -156,7 +156,7 @@ const generateLocationCheckboxes = async () => {
     allCheckbox.type = 'checkbox';
     allCheckbox.value = 'Location';
     allLabel.appendChild(allCheckbox);
-    allLabel.appendChild(document.createTextNode(' All'));
+    allLabel.appendChild(document.createTextNode(' Clear'));
     locationDropdown.appendChild(allLabel);
 
     // Create checkboxes for each location
