@@ -537,6 +537,57 @@ input:checked + .slider:before {
     left: 2px;                       
 }
 
+.rowBgDarkGreen {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+}
+
+.rowBgLightGreen {
+    background-color: #79C8A3; 
+    color: black;
+    font-size: 18px;
+}
+
+.noBorder {
+    border: none !important;
+}
+
+.teamsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-height: 400px; 
+    overflow-y: auto;
+    padding: 10px; 
+    background-color: none;
+    border-radius: 10px;
+}
+
+.team {
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 25%; 
+    margin: 10px; 
+    font-family: Lato-Regular;
+}
+
+.teamHeader {
+    background-color: #79C8A3;
+    color: white;
+    font-family: Lato-Bold;
+    margin: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.namesDiv {
+    padding: 20px;
+}
 
 
 @media (max-width: 768px) {
