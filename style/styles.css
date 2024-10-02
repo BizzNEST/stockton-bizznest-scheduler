@@ -59,8 +59,6 @@ header {
 
 .pairingBackgroundImage {
     padding-top: 80px; /* Adjust padding to avoid overlapping with the header */
-    padding-left: 200px; 
-    padding-right: 200px;
 }
 
 
@@ -562,7 +560,7 @@ input:checked + .slider:before {
     background-color: white;
     border-radius: 10px;
     text-align: center;
-    width: calc(25% - 20px); 
+    width: 25%; 
     margin: 10px; 
     font-family: Lato-Regular;
 }
