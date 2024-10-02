@@ -407,6 +407,6 @@ departmentSwitch.addEventListener('change', pairInterns);
 locationSwitch.addEventListener('change', pairInterns);
 pairButton.addEventListener('click', () => {
     pairInterns();
-    window.location.href = "/Pages/pairings.html";
+    window.location.href = "/pages/pairings.html";
 });
 });
