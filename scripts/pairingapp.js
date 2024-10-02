@@ -1,33 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
     const displayPairedInterns = () => {
-        const pairingTableBody = document.getElementById("pairTableBody");
-
+        const teamsContainer = document.getElementById("teamsContainer");
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
-        pairingTableBody.innerHTML = ""; 
+        teamsContainer.innerHTML = ""; 
+
         if (pairedInterns.length === 0) {
-            pairingTableBody.innerHTML = '<tr><td colspan="2">No pairs available</td></tr>';
+            teamsContainer.innerHTML = '<p>No pairs available</p>';
             return;
         }
 
-        pairedInterns.forEach((pair, index) => {
-            const row = document.createElement("tr");
-            row.className = `${index % 2 === 0 ? "rowBgDarkGreen" : "rowBgLightGreen"}`;
+        teamsContainer.className = "teamsContainer";
 
-            const nameCol = document.createElement("td");
-            nameCol.classList.add("noBorder"); 
-            nameCol.innerHTML = pair.map(intern => intern.name).join("<br>"); 
-            row.appendChild(nameCol);
-            
-            const departCol = document.createElement("td");
-            departCol.classList.add("noBorder");
-            departCol.innerHTML = pair.map(intern => intern.department).join("<br>"); 
-            row.appendChild(departCol);
-            
-            pairingTableBody.appendChild(row);
-        });
+        for (let i = 0; i < pairedInterns.length; i++) {
+            const teamDiv = document.createElement("div");
+            teamDiv.className = "team";
+            const teamHeader = document.createElement("p");
+            teamHeader.className = "teamHeader"; 
+            teamHeader.innerText = `Team ${i + 1}`; 
+
+            const namesDiv = document.createElement("div");
+            namesDiv.className = "namesDiv";
+
+            pairedInterns[i].forEach(intern => {
+                const internName = document.createElement("p");
+                internName.style.margin = "0px";
+                internName.innerText = intern.name;
+                namesDiv.appendChild(internName);
+            });
+
+            teamDiv.appendChild(teamHeader);
+            teamDiv.appendChild(namesDiv);
+            teamsContainer.appendChild(teamDiv);
+        }
     };
 
-    if (document.getElementById("pairTableBody")) {
+    if (document.getElementById("teamsContainer")) {
         displayPairedInterns();
     }
 });
