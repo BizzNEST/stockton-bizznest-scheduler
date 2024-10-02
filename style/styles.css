@@ -553,7 +553,7 @@ input:checked + .slider:before {
     max-height: 400px; 
     overflow-y: auto;
     padding: 10px; 
-    background-color: #79C8A3;
+    background-color: none;
     border-radius: 10px;
 }
 
@@ -564,20 +564,22 @@ input:checked + .slider:before {
     text-align: center;
     width: calc(25% - 20px); 
     margin: 10px; 
+    font-family: Lato-Regular;
 }
 
 .teamHeader {
-    background-color: green;
+    background-color: #79C8A3;
     color: white;
+    font-family: Lato-Bold;
     margin: 0;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
 }
 
 .namesDiv {
-    padding: 10px;
+    padding: 20px;
 }
 
 @media (max-width: 768px) {
