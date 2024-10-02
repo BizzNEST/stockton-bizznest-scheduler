@@ -23,8 +23,7 @@
            
         </div>
         <div class="resetAndSave">
-            <button>Reset</button>
-            <button>Save</button>
+            <button class="resetToggleStyle" id="resetToggle">Reset</button>
         </div>
     </main>
     <div class="footerContainer">
@@ -32,6 +31,20 @@
         <div class="footerTextContainer">
             <p class="footerText">Powered by bizzNest Interns</p>
             <p class="footerText">© Copyright 2024 | Digital Nest | All Rights Reserved</p>
+        </div>
+    </div>
+    <div class="modalComponentBackgroundReset hidden" id="modalResetId">
+        <div class="modalComponentReset">
+            <div class="containerHeaderResetModal">
+                <p style="margin: 0px;">Are You Sure You Want to Reset?</p>
+            </div>
+            <div class="containerForBodyResetModal">
+                <p style="margin: 0;">All unsaved progress will be lost, and you will be redirected to the homepage. This action cannot be undone.</p>
+            </div>
+            <div class="containerForResetModalButtons">
+                <button class="cancelButtonStyle" id="cancelButton">Cancel</button>
+                <button class="resetButtonStyle" id="resetButton">Reset</button>
+            </div>
         </div>
     </div>
     <script src="../scripts/pairingapp.js"></script>

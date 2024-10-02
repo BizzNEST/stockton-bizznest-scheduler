@@ -14,6 +14,8 @@ const searchInput = document.getElementById("searchInput");
 const pairButton = document.getElementById("pairButton");
 const departmentSwitch = document.getElementById("departmentSwitch");
 const locationSwitch = document.getElementById("locationSwitch");
+const cancelButton = document.getElementById("cancelButton");
+const modalResetId = document.getElementById("modalResetId");
 
 let currentPage = 1;
 let interns = [];
@@ -357,6 +359,9 @@ startPairingButton.addEventListener("click", () => {
 });
 
 loadItems();
+cancelButton.addEventListener("click", () => {
+    modalResetId.classList.add("hidden");
+});
 
 const pairInterns = () => {
     const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
@@ -364,7 +369,7 @@ const pairInterns = () => {
     const internPair = interns.filter(intern => !selectedIds.includes(String(intern.id)));
     let pairs = [];
     if (internPair.length < 2) {
-        alert("Not enough interns available for pairing.");
+        modalResetId.classList.remove("hidden")
         return;
     }
     const departGroup = departmentSwitch.checked;
@@ -406,7 +411,17 @@ const pairInterns = () => {
 departmentSwitch.addEventListener('change', pairInterns);
 locationSwitch.addEventListener('change', pairInterns);
 pairButton.addEventListener('click', () => {
+    const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
+    const selectedIds = Object.keys(selectedInterns).filter(id => selectedInterns[id]);
+    const internPair = interns.filter(intern => !selectedIds.includes(String(intern.id)));
+
+    if (internPair.length < 2) {
+        modalResetId.classList.remove("hidden");
+        return; 
+    }
+
     pairInterns();
-    window.location.href = "/pages/pairings.html";
+    window.location.href = "/pages/pairings.html"; 
 });
+
 });

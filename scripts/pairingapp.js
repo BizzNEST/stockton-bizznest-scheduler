@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const resetButton = document.getElementById("resetButton");
+    const cancelButton = document.getElementById("cancelButton");
+    const modalResetId = document.getElementById("modalResetId");
+    const resetToggle = document.getElementById("resetToggle");
+
     const displayPairedInterns = () => {
         const teamsContainer = document.getElementById("teamsContainer");
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
@@ -37,4 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("teamsContainer")) {
         displayPairedInterns();
     }
+
+    resetButton.addEventListener("click", () => {
+        sessionStorage.clear();
+        window.location.href = "/";
+    })
+
+    cancelButton.addEventListener("click", () => {
+        modalResetId.classList.add("hidden");
+    })
+
+    resetToggle.addEventListener("click", () => {
+        modalResetId.classList.remove("hidden");
+    })
+
+
 });
