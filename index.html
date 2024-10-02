@@ -15,7 +15,7 @@
             <img src="./assets/bizzNESTLogo.png" alt="bizzNESTLogoTwo">
         </div>
 
-        <div>
+        <div class="headingText">
             <p class="bizzNESTHeader">Welcome to bizzNEST Hub</p>
             <p class="bizzNESTSubText">Connect with interns across different departments and cities</p>
         </div>
@@ -44,43 +44,45 @@
                 </div>
             </div>
 
-            <div class="filterContainer">
-                <div class="filterContainer">
-                    <div class="dropdown">
-                        <button id="dropdownButton1" class="dropdownButton">
-                            <span class="button-text">Departments</span>
-                            <span class="dropdown-icon">&#9662;</span> 
-                        </button>
-                        <div id="departments" class="dropdown-content"></div>
-                    </div>
-                    
-                    <div class="dropdown">
-                        <button id="dropdownButton2" class="dropdownButton">
-                            <span class="button-text">Locations</span>
-                            <span class="dropdown-icon">&#9662;</span> 
-                        </button>
-                        <div id="locations" class="dropdown-content"></div>
-                    </div>
+            <div class="filterContainer1">
+               <div class="filterContainer">
+                <div class="dropdown">
+                    <button id="dropdownButton1" class="dropdownButton">
+                        <span class="button-text">Departments</span>
+                        <span class="dropdown-icon">&#9662;</span> 
+                    </button>
+                    <div id="departments" class="dropdown-content"></div>
                 </div>
+                
+                <div class="dropdown">
+                    <button id="dropdownButton2" class="dropdownButton">
+                        <span class="button-text">Locations</span>
+                        <span class="dropdown-icon">&#9662;</span> 
+                    </button>
+                    <div id="locations" class="dropdown-content"></div>
+                </div>
+            </div> 
                 <div class="searchbox-container">
                     <input class="searchBox" type="text" id="searchInput" placeholder="Search interns...">
-                    <img src="assets/search.png" alt="Search" class="search-icon" />                </div>            
+                    <img src="assets/search.png" alt="Search" class="search-icon" />
+                </div>
             </div>
+            
             <div class="buttonsAndCheckBoxContainer">
-                <div>
+                <div class="selectandDeselect">
                     <button class="buttonSelectStyle" id="selectAllButton">Select All</button>
                     <button class="buttonDeselectStyle" id="deselectAllButton">Deselect All</button>
                 </div>
                 <div class="checkboxDiv">
                     <div class="checkboxContainer">
-                        <p style="margin: 0;">Match from same location</p>
+                        <p style="margin: 0;">Pair from same location</p>
                         <label class="switch">
                             <input type="checkbox" id="locationSwitch" />
                             <span class="slider round"></span>
                         </label>
                     </div>
                     <div class="checkboxContainer">
-                        <p style="margin: 0;">Match from same department</p>
+                        <p style="margin: 0;">Pair from same department</p>
                         <label class="switch">
                             <input type="checkbox" id="departmentSwitch" />
                             <span class="slider round"></span>
