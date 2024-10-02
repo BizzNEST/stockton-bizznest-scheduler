@@ -9,7 +9,10 @@ const selectAllButton = document.getElementById("selectAllButton");
 const deselectAllButton = document.getElementById("deselectAllButton");
 const departmentDropdown = document.getElementById("departments");
 const locationDropdown = document.getElementById("locations");
-const searchInput = document.getElementById('searchInput');
+const searchInput = document.getElementById("searchInput");
+const pairButton = document.getElementById("pairButton");
+const departmentSwitch = document.getElementById("departmentSwitch");
+const locationSwitch = document.getElementById("locationSwitch");
 
 let currentPage = 1;
 let interns = [];
@@ -66,17 +69,15 @@ const updateDropdownCheckboxes = (checkboxes, selectedItems) => {
 const setupDropdownToggle = (buttonId, contentId) => {
     const button = document.getElementById(buttonId);
     const content = document.getElementById(contentId);
-
     let isDropdownVisible = false;
-
-    button.addEventListener('click', function(event) {
+    button.addEventListener('click', function (event) {
         event.stopPropagation(); // Prevent the click from propagating to the document
         isDropdownVisible = !isDropdownVisible;
         content.classList.toggle('show', isDropdownVisible);
     });
 
     // Hide the dropdown when clicking outside of it
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         if (!button.contains(event.target) && !content.contains(event.target)) {
             isDropdownVisible = false;
             content.classList.remove('show');
@@ -91,7 +92,6 @@ setupDropdownToggle('dropdownButton2', 'locations');
 // Generate department checkboxes dynamically
 const generateDepartmentCheckboxes = async () => {
     const departments = await fetchDepartments();
-
     // Create "All" checkbox
     const allLabel = document.createElement('label');
     const allCheckbox = document.createElement('input');
@@ -111,13 +111,12 @@ const generateDepartmentCheckboxes = async () => {
         label.appendChild(document.createTextNode(` ${department}`));
         departmentDropdown.appendChild(label);
     });
-
+    
     // Attach event listeners for the new checkboxes
     const departmentCheckboxes = document.querySelectorAll('#departments input[type="checkbox"]');
     departmentCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', () => {
             const value = checkbox.value;
-
             if (value === "Department") {
                 // Reset all selections if "All" is checked
                 if (checkbox.checked) {
@@ -136,9 +135,8 @@ const generateDepartmentCheckboxes = async () => {
                     }
                 } else {
                     selectedDepartments = selectedDepartments.filter(item => item !== value);
-                }
-            }
-
+                };
+            };
             updateDropdownCheckboxes(departmentCheckboxes, selectedDepartments);
             loadInterns();
         });
@@ -179,13 +177,13 @@ const generateLocationCheckboxes = async () => {
             if (value === "Location") {
                 // Reset all selections if "All" is checked
                 if (checkbox.checked) {
-                    selectedLocations = []; 
+                    selectedLocations = [];
                     locationCheckboxes.forEach(cb => {
                         if (cb.value !== "Location") {
                             cb.checked = false; // Uncheck other boxes
                         }
                     });
-                }
+                };
             } else {
                 // Handle regular location selections
                 if (checkbox.checked) {
@@ -194,8 +192,8 @@ const generateLocationCheckboxes = async () => {
                     }
                 } else {
                     selectedLocations = selectedLocations.filter(item => item !== value);
-                }
-            }
+                };
+            };
 
             updateDropdownCheckboxes(locationCheckboxes, selectedLocations);
             loadInterns();
@@ -220,12 +218,12 @@ const loadInterns = () => {
     } else {
         if (selectedDepartments.length > 0) {
             filteredInterns = filteredInterns.filter(intern => selectedDepartments.includes(intern.department));
-        }
+        };
 
         if (selectedLocations.length > 0) {
             filteredInterns = filteredInterns.filter(intern => selectedLocations.includes(intern.location));
-        }
-    }
+        };
+    };
 
     if (filteredInterns.length === 0) {
         tableBody.innerHTML = '<tr><td colspan="4">No interns found</td></tr>';
@@ -233,7 +231,7 @@ const loadInterns = () => {
     }
 
     const totalPages = Math.ceil(filteredInterns.length / pageSize);
-    
+
     if (currentPage > totalPages) {
         currentPage = totalPages;
     }
@@ -252,7 +250,7 @@ const loadInterns = () => {
         checkbox.type = "checkbox";
         checkbox.checked = selectedInterns[intern.id] || false;
 
-        checkbox.classList.add("intern-checkbox"); 
+        checkbox.classList.add("intern-checkbox");
 
         checkbox.addEventListener("change", () => {
             if (checkbox.checked) {
@@ -358,3 +356,52 @@ startPairingButton.addEventListener("click", () => {
 });
 
 loadItems();
+
+const pairInterns = () => {
+    const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
+    const selectedIds = Object.keys(selectedInterns).filter(id => selectedInterns[id]);
+    const internPair = interns.filter(intern => !selectedIds.includes(String(intern.id)));
+    let pairs = [];
+    if (internPair.length < 2) {
+        alert("Not enough interns available for pairing.");
+        return;
+    }
+    const departGroup = departmentSwitch.checked;
+    const locationGroup = locationSwitch.checked;
+    
+    while (internPair.length > 1) {
+        let firstIntern = internPair.splice(Math.floor(Math.random() * internPair.length), 1)[0];
+        let partnerIndex = internPair.findIndex(intern => {
+            if (departGroup && locationGroup) {
+                return intern.department === firstIntern.department && intern.location === firstIntern.location;
+            }
+            else if (departGroup) {
+                return intern.department === firstIntern.department;
+            }
+            else if (locationGroup) {
+                return intern.location === firstIntern.location;
+            }
+            return false;
+        });
+        if (partnerIndex !== -1) {
+            let secondIntern = internPair.splice(partnerIndex, 1)[0];
+            pairs.push([firstIntern, secondIntern]);
+        } else {
+            let secondIndex = Math.floor(Math.random() * internPair.length);
+            let secondIntern = internPair.splice(secondIndex, 1)[0];
+            pairs.push([firstIntern, secondIntern]);
+        };
+    };
+    if (internPair.length === 1) {
+        const unpairedIntern = internPair[0];
+        if (pairs.length > 0) {
+            pairs[pairs.length - 1].push(unpairedIntern);
+        } else {
+            pairs.push([unpairedIntern]);
+        };
+    };
+    sessionStorage.setItem("pairedInterns", JSON.stringify(pairs));
+};
+departmentSwitch.addEventListener('change', pairInterns);
+locationSwitch.addEventListener('change', pairInterns);
+pairButton.addEventListener('click', pairInterns);
