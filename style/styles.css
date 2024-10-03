@@ -569,7 +569,7 @@ input:checked + .slider:before {
     background-color: white;
     border-radius: 10px;
     text-align: center;
-    width: 25%; 
+    width: 15%; 
     margin: 10px; 
     font-family: Lato-Regular;
 }
@@ -588,7 +588,9 @@ input:checked + .slider:before {
 .namesDiv {
     padding: 20px;
 }
-
+.namesDiv p {
+    font-size: 15px;
+}
 .downloadButton {
     background-color: #BA2C8E; 
     border: none; 
