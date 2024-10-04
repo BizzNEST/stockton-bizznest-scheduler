@@ -16,11 +16,18 @@
         <h1>Pairs</h1>
         <div class="buttonsAndSearch">
             <button>Download PDF</button>
-            <button>Edit</button>
-            <input type="text" placeholder="Search">
+            <button id="editButton">Edit</button>
         </div>
         <div id="teamsContainer">
-           
+            
+        </div>
+        <div id="addInternModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Assign Unpaired Interns</h2>
+                <input type="text" id="searchUnpairedIntern" placeholder="Search interns..." />
+                <div id="unpairedList"></div>
+            </div>
         </div>
         <div class="resetAndSave">
             <button>Reset</button>
