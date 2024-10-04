@@ -99,7 +99,7 @@ const generateDepartmentCheckboxes = async () => {
     allCheckbox.type = 'checkbox';
     allCheckbox.value = 'Department';
     allLabel.appendChild(allCheckbox);
-    allLabel.appendChild(document.createTextNode(' All'));
+    allLabel.appendChild(document.createTextNode(' Clear'));
     departmentDropdown.appendChild(allLabel);
 
     // Create checkboxes for each department
@@ -155,7 +155,7 @@ const generateLocationCheckboxes = async () => {
     allCheckbox.type = 'checkbox';
     allCheckbox.value = 'Location';
     allLabel.appendChild(allCheckbox);
-    allLabel.appendChild(document.createTextNode(' All'));
+    allLabel.appendChild(document.createTextNode(' Clear'));
     locationDropdown.appendChild(allLabel);
 
     // Create checkboxes for each location
@@ -361,7 +361,7 @@ loadItems();
 const pairInterns = () => {
     const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
     const selectedIds = Object.keys(selectedInterns).filter(id => selectedInterns[id]);
-    const internPair = interns.filter(intern => !selectedIds.includes(String(intern.id)));
+    const internPair = interns.filter(intern => selectedIds.includes(String(intern.id)));
     let pairs = [];
     if (internPair.length < 2) {
         alert("Not enough interns available for pairing.");
