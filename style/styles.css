@@ -198,7 +198,7 @@ header {
     text-align: center;
     border: solid 2px #309C68;
     border-radius: 5px;
-    border-collapse: separate;
+    border-collapse: collapse;
     border-spacing: 0;
 }
 
@@ -227,6 +227,14 @@ tbody td {
     font-size: 18px;
     padding: 10px;
     border: 1px solid #79C8A3;
+}
+
+.tableBodyStyling td {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-bottom-left-radius: #79C8A3;
+    border-bottom-right-radius: #79C8A3;
+    
 }
 
 .paginationContainer{
@@ -584,6 +592,8 @@ input:checked + .slider:before {
     padding: 10px;
     text-align: center;
 }
+
+
 
 .namesDiv {
     padding: 20px;

@@ -2,9 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let teamIndexToAddIntern;
     let unpairedInterns = [];
     let isEditMode = false;
+        
     const displayPairedInterns = () => {
         const teamsContainer = document.getElementById("teamsContainer");
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
+        
         teamsContainer.innerHTML = ""; 
 
         if (pairedInterns.length === 0) {
@@ -14,62 +16,92 @@ document.addEventListener("DOMContentLoaded", () => {
 
         teamsContainer.className = "teamsContainer";
 
-        for (let i = 0; i < pairedInterns.length; i++) {
-            const teamDiv = document.createElement("div");
-            teamDiv.className = "team";
-            const teamHeader = document.createElement("p");
-            teamHeader.className = "teamHeader"; 
-            teamHeader.innerText = `Team ${i + 1}`; 
+        // Create table structure
+        const table = document.createElement("table");
+        table.className = "mainTableContainer";
+        const thead = document.createElement("thead");
+        thead.className = "tableHeaderStyling";
+        const headerRow = document.createElement("tr");
+        headerRow.innerHTML = `
+            <th>Name</th>
+            <th>Department</th>
+            <th>Location</th>
+            ${isEditMode ? '<th>Add</th>' : ''}
+        `;
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
 
-            const namesDiv = document.createElement("div");
-            namesDiv.className = "namesDiv";
+        const tbody = document.createElement("tbody");
+        tbody.id = "tableBody";
+        tbody.className = "tableBodyStyling";
 
-            pairedInterns[i].forEach((intern, internIndex) => {
-                const internContainer = document.createElement("div");
-                internContainer.style.display = "flex";
-                internContainer.style.alignItems = "center";
+        pairedInterns.forEach((team, teamIndex) => {
 
-                const internName = document.createElement("p");
-                internName.style.margin = "0px";
-                internName.innerText = intern.name;
-                
-                internContainer.appendChild(internName);
+            team.forEach((intern, internIndex) => {
+                const teamMembersCell = document.createElement("tr");
+                teamMembersCell.className = "teamMembersCell";
 
-                
+                const nameCell = document.createElement("td");
+                nameCell.innerText = intern.name;
+                teamMembersCell.appendChild(nameCell);
+
+                const departmentCell = document.createElement("td");
+                departmentCell.innerText = intern.department;
+                teamMembersCell.appendChild(departmentCell);
+
+                const locationCell = document.createElement("td");
+                locationCell.innerText = intern.location;
+                teamMembersCell.appendChild(locationCell);
+
                 if (isEditMode) {
                     const removeButton = document.createElement("button");
                     removeButton.innerText = "x";
-                    removeButton.style.marginLeft = "10px";
+                    removeButton.style.marginLeft = "5px";
                     removeButton.style.cursor = "pointer";
                     removeButton.addEventListener("click", () => {
-                        removeIntern(i, internIndex);
+                        removeIntern(teamIndex, internIndex);
                     });
 
-                    internContainer.appendChild(removeButton);
+                    nameCell.appendChild(removeButton);
                 }
-                internContainer.appendChild(internName);
-                namesDiv.appendChild(internContainer);
+                // Check if this is the last intern in the team
+                if (internIndex === team.length - 1) {
+                    nameCell.style.borderBottom = "2px solid green";
+                    departmentCell.style.borderBottom = "2px solid green";
+                    locationCell.style.borderBottom = "2px solid green";
+                }
+
+                if (isEditMode && internIndex === 0) {
+                    const actionsCell = document.createElement("td");
+                    actionsCell.rowSpan = team.length;
+                    actionsCell.style.borderBottom = "2px solid green";
+                    
+                    const addButton = document.createElement("button");
+                    addButton.innerText = "+";
+                    addButton.style.marginTop = "10px";
+                    addButton.style.cursor = "pointer";
+                    addButton.addEventListener("click", () => {
+                        openModal(teamIndex);
+                    });
+    
+                    actionsCell.appendChild(addButton);
+                    teamMembersCell.appendChild(actionsCell);
+                }
+        
+                tbody.appendChild(teamMembersCell);
             });
+             
+        });
 
-            if (isEditMode) {
-                const addButton = document.createElement("button");
-                addButton.innerText = "+";
-                addButton.style.marginTop = "10px";
-                addButton.style.cursor = "pointer";
-                addButton.addEventListener("click", () => {
-                    openModal(i);
-                });
-
-                namesDiv.appendChild(addButton);
-            }
-
-
-            teamDiv.appendChild(teamHeader);
-            teamDiv.appendChild(namesDiv);
-            teamsContainer.appendChild(teamDiv);
-        }
+        table.appendChild(tbody);
+        teamsContainer.appendChild(table);
     };
 
+    if (document.getElementById("teamsContainer")) {
+        displayPairedInterns();
+    }
+    
+        
     const removeIntern = (teamIndex, internIndex) => {
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
         const removedIntern = pairedInterns[teamIndex][internIndex];
