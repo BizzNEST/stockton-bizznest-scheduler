@@ -361,7 +361,7 @@ loadItems();
 const pairInterns = () => {
     const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
     const selectedIds = Object.keys(selectedInterns).filter(id => selectedInterns[id]);
-    const internPair = interns.filter(intern => !selectedIds.includes(String(intern.id)));
+    const internPair = interns.filter(intern => selectedIds.includes(String(intern.id)));
     let pairs = [];
     if (internPair.length < 2) {
         alert("Not enough interns available for pairing.");
