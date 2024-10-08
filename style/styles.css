@@ -130,6 +130,85 @@ header {
     background-color: rgba(0, 0, 0, 0.537);
 }
 
+.modalComponentBackgroundReset {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.537);
+}
+
+.modalComponentReset{
+    background-color: white;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 433px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 40px 5px rgba(0, 0, 0, 0.25);
+    border: 1px solid #79C8A3;
+}
+
+.cancelButtonStyle{
+    border: 2px solid #BA2C8E; 
+    background-color: white; 
+    border-radius: 3px; 
+    font-size: 16px; 
+    font-family: Lato-Bold; 
+    padding: 8px 36px; 
+    color: #BA2C8E;
+}
+
+.resetButtonStyle{
+    border: none; 
+    background-color: #BA2C8E; 
+    border-radius: 3px; 
+    font-size: 16px; 
+    font-family: Lato-Bold; 
+    padding: 8px 36px; 
+    color: white;
+}
+
+.resetToggleStyle{
+    background-color: #BA2C8E;
+    color: white;
+    font-family: Lato-Bold;
+    font-size: 20px;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 15px;
+}
+
+.containerForBodyResetModal{
+    padding-top: 15px; 
+    padding-left: 23px; 
+    padding-right: 23px; 
+    padding-bottom: 26px; 
+    font-family: Lato-Regular; 
+    font-size: 20px; 
+    text-align: center;
+}
+
+.containerHeaderResetModal{
+    color: white; 
+    background-color: #309C68; 
+    font-family: Lato-Bold; 
+    font-size: 20px; 
+    padding-top: 13px; 
+    padding-bottom: 10px; 
+    text-align: center;
+}
+
+.containerForResetModalButtons{
+    display: flex; 
+    justify-content: space-evenly; 
+    padding-bottom: 25px;
+}
 .modalComponent{
     background-color: white;
     padding: 30px;

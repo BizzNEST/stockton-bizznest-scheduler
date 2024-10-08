@@ -14,6 +14,8 @@ const searchInput = document.getElementById("searchInput");
 const pairButton = document.getElementById("pairButton");
 const departmentSwitch = document.getElementById("departmentSwitch");
 const locationSwitch = document.getElementById("locationSwitch");
+const cancelButton = document.getElementById("cancelButton");
+const modalResetId = document.getElementById("modalResetId");
 
 let currentPage = 1;
 let interns = [];
@@ -357,14 +359,18 @@ startPairingButton.addEventListener("click", () => {
 });
 
 loadItems();
+cancelButton.addEventListener("click", () => {
+    modalResetId.classList.add("hidden");
+});
 
 const pairInterns = () => {
     const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
     const selectedIds = Object.keys(selectedInterns).filter(id => selectedInterns[id]);
     const internPair = interns.filter(intern => selectedIds.includes(String(intern.id)));
     let pairs = [];
+    let validPairsCount = 0;
     if (internPair.length < 2) {
-        alert("Not enough interns available for pairing.");
+        modalResetId.classList.remove("hidden")
         return;
     }
     const departGroup = departmentSwitch.checked;
@@ -387,6 +393,7 @@ const pairInterns = () => {
         if (partnerIndex !== -1) {
             let secondIntern = internPair.splice(partnerIndex, 1)[0];
             pairs.push([firstIntern, secondIntern]);
+            validPairsCount++;
         } else {
             let secondIndex = Math.floor(Math.random() * internPair.length);
             let secondIntern = internPair.splice(secondIndex, 1)[0];
@@ -402,11 +409,38 @@ const pairInterns = () => {
         };
     };
     sessionStorage.setItem("pairedInterns", JSON.stringify(pairs));
+
+    const totalPairs = pairs.length;
+        let accuracy = totalPairs >= 0 ? (validPairsCount / totalPairs) * 100 : 0;
+        let pairingAcc = 0;
+        if (accuracy.toFixed(2) === '0.00') {
+            accuracy = 100;
+        }
+        pairingAcc = accuracy.toFixed(2);
+
+        const accPairs = [{
+            "Total pairs created:": totalPairs,
+            "Valid pairs based on Filters:": validPairsCount,
+            "Pairing accuracy": pairingAcc
+        }]
+
+        sessionStorage.setItem("acc", JSON.stringify(accPairs));
+
 };
 departmentSwitch.addEventListener('change', pairInterns);
 locationSwitch.addEventListener('change', pairInterns);
 pairButton.addEventListener('click', () => {
+    const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
+    const selectedIds = Object.keys(selectedInterns).filter(id => selectedInterns[id]);
+    const internPair = interns.filter(intern => !selectedIds.includes(String(intern.id)));
+
+    if (internPair.length < 2) {
+        modalResetId.classList.remove("hidden");
+        return; 
+    }
+
     pairInterns();
-    window.location.href = "/pages/pairings.html";
+    window.location.href = "/pages/pairings.html"; 
 });
+
 });
