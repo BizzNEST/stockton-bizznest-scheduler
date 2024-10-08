@@ -432,15 +432,18 @@ locationSwitch.addEventListener('change', pairInterns);
 pairButton.addEventListener('click', () => {
     const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
     const selectedIds = Object.keys(selectedInterns).filter(id => selectedInterns[id]);
-    const internPair = interns.filter(intern => !selectedIds.includes(String(intern.id)));
+    const internPair = interns.filter(intern => selectedIds.includes(String(intern.id)));
 
     if (internPair.length < 2) {
         modalResetId.classList.remove("hidden");
         return; 
+    }else{
+        pairInterns();
+        window.location.href = "/pages/pairings.html"; 
     }
 
-    pairInterns();
-    window.location.href = "/pages/pairings.html"; 
+    
+    
 });
 
 });
