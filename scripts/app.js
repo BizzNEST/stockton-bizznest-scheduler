@@ -368,6 +368,7 @@ const pairInterns = () => {
     const selectedIds = Object.keys(selectedInterns).filter(id => selectedInterns[id]);
     const internPair = interns.filter(intern => selectedIds.includes(String(intern.id)));
     let pairs = [];
+    let validPairsCount = 0;
     if (internPair.length < 2) {
         modalResetId.classList.remove("hidden")
         return;
@@ -392,6 +393,7 @@ const pairInterns = () => {
         if (partnerIndex !== -1) {
             let secondIntern = internPair.splice(partnerIndex, 1)[0];
             pairs.push([firstIntern, secondIntern]);
+            validPairsCount++;
         } else {
             let secondIndex = Math.floor(Math.random() * internPair.length);
             let secondIntern = internPair.splice(secondIndex, 1)[0];
@@ -407,6 +409,23 @@ const pairInterns = () => {
         };
     };
     sessionStorage.setItem("pairedInterns", JSON.stringify(pairs));
+
+    const totalPairs = pairs.length;
+        let accuracy = totalPairs >= 0 ? (validPairsCount / totalPairs) * 100 : 0;
+        let pairingAcc = 0;
+        if (accuracy.toFixed(2) === '0.00') {
+            accuracy = 100;
+        }
+        pairingAcc = accuracy.toFixed(2);
+
+        const accPairs = [{
+            "Total pairs created:": totalPairs,
+            "Valid pairs based on Filters:": validPairsCount,
+            "Pairing accuracy": pairingAcc
+        }]
+
+        sessionStorage.setItem("acc", JSON.stringify(accPairs));
+
 };
 departmentSwitch.addEventListener('change', pairInterns);
 locationSwitch.addEventListener('change', pairInterns);
