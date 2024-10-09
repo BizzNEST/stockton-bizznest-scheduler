@@ -162,6 +162,7 @@ header {
     font-family: Lato-Bold; 
     padding: 8px 36px; 
     color: #BA2C8E;
+    cursor: pointer;
 }
 
 .resetButtonStyle{
@@ -172,6 +173,7 @@ header {
     font-family: Lato-Bold; 
     padding: 8px 36px; 
     color: white;
+    cursor: pointer;
 }
 
 .resetToggleStyle{
@@ -182,6 +184,11 @@ header {
     padding: 10px 50px;
     border: none;
     border-radius: 15px;
+    cursor: pointer;
+}
+
+.resetToggleStyle:hover{
+    background-color: #7a1d5d;
 }
 
 .containerForBodyResetModal{
