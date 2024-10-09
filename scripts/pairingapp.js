@@ -91,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
                 if (isEditMode) {
                     const removeButton = document.createElement("button");
+                    removeButton.classList.add("remove-button");
                     removeButton.innerText = "x";
                     removeButton.style.marginLeft = "5px";
                     removeButton.style.cursor = "pointer";
@@ -178,13 +179,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Add a new intern to the selected team
-    const addNewIntern = (internName) => {
+    const addNewIntern = (internObj) => {
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
 
-        pairedInterns[teamIndexToAddIntern].push({ name: internName });
+        pairedInterns[teamIndexToAddIntern].push(internObj);
 
         // Remove added intern from the unpaired array
-        unpairedInterns = unpairedInterns.filter(intern => intern.name !== internName);
+        unpairedInterns = unpairedInterns.filter(intern => intern.name !== internObj.name);
 
         sessionStorage.setItem("pairedInterns", JSON.stringify(pairedInterns));
         closeModal();
@@ -208,10 +209,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         filteredInterns.forEach(intern => {
             const internDiv = document.createElement("div");
-            internDiv.innerText = intern.name;
-            internDiv.style.cursor = "pointer";
+            internDiv.classList.add("unpaired-intern");
+            internDiv.innerHTML = `${intern.name} - ${intern.department} - ${intern.location}`; // Display all details
+
             internDiv.addEventListener("click", () => {
-                addNewIntern(intern.name);
+            addNewIntern(intern); 
             });
             unpairedList.appendChild(internDiv);
         });
