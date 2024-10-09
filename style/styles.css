@@ -735,7 +735,14 @@ input:checked + .slider:before {
 
 .resetAndSave{
     padding: 10px;
+    font-family: Lato-Bold;
 }
+
+.resetAndAccContainerStyle{
+    display: flex;
+    justify-content: space-between;
+}
+
 @media (max-width: 768px) {
     .bizzNESTHeader {
         font-size: 36px;

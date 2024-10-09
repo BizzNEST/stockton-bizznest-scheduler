@@ -5,12 +5,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const resetToggle = document.getElementById("resetToggle");
     const modalWarning = document.getElementById("modalWarning");
     const anotherCancelButton = document.getElementById("anotherCancelButton");
+    const accuracyDiv = document.getElementById("accuracyDiv");
+    const resetAndAccContainer = document.getElementById("resetAndAccContainer");
 
     let teamIndexToAddIntern;
     let unpairedInterns = [];
     let isEditMode = false;
     let modalDisplayed = false;
     const groupsOfThree = sessionStorage.getItem("groupsOfThree");
+    const accObject = JSON.parse(sessionStorage.getItem("acc"));
+
+    const pTag = document.createElement("p");
+    resetAndAccContainer.classList.add("resetAndAccContainerStyle")
+    pTag.innerText = `${accObject[0].Pairing_accuracy}% Accuracy`;
+    resetAndAccContainer.appendChild(pTag);
+
+
 
     if (groupsOfThree === "1" && !modalDisplayed) {
         modalWarning.classList.remove("hidden");
@@ -21,11 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
         modalWarning.classList.add("hidden");
     })
 
+
     const displayPairedInterns = () => {
         const teamsContainer = document.getElementById("teamsContainer");
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
-        
-        teamsContainer.innerHTML = ""; 
+
+        teamsContainer.innerHTML = "";
 
         if (pairedInterns.length === 0) {
             teamsContainer.innerHTML = '<p>No pairs available</p>';
@@ -93,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const actionsCell = document.createElement("td");
                     actionsCell.rowSpan = team.length;
                     actionsCell.style.borderBottom = "2px solid green";
-                    
+
                     const addButton = document.createElement("button");
                     addButton.innerText = "+";
                     addButton.style.marginTop = "10px";
@@ -101,14 +112,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     addButton.addEventListener("click", () => {
                         openModal(teamIndex);
                     });
-    
+
                     actionsCell.appendChild(addButton);
                     teamMembersCell.appendChild(actionsCell);
                 }
-        
+
                 tbody.appendChild(teamMembersCell);
             });
-             
+
         });
 
         table.appendChild(tbody);
@@ -133,14 +144,14 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
 
-    
-        
+
+
     const removeIntern = (teamIndex, internIndex) => {
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
         const removedIntern = pairedInterns[teamIndex][internIndex];
-        pairedInterns[teamIndex].splice(internIndex, 1); 
+        pairedInterns[teamIndex].splice(internIndex, 1);
 
-        
+
         if (pairedInterns[teamIndex].length === 0) {
             pairedInterns.splice(teamIndex, 1);
         }
@@ -148,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         unpairedInterns.push(removedIntern);
 
         sessionStorage.setItem("pairedInterns", JSON.stringify(pairedInterns));
-        displayPairedInterns(); 
+        displayPairedInterns();
     };
 
     const openModal = (teamIndex) => {
@@ -185,9 +196,9 @@ document.addEventListener("DOMContentLoaded", () => {
             modalContent.appendChild(unpairedList);
         }
 
-        unpairedList.innerHTML = '';  
+        unpairedList.innerHTML = '';
 
-        const filteredInterns = unpairedInterns.filter(intern => 
+        const filteredInterns = unpairedInterns.filter(intern =>
             intern.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
@@ -223,11 +234,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const searchUnpairedInternInput = document.getElementById("searchUnpairedIntern");
     searchUnpairedInternInput.addEventListener("input", (event) => {
-        displayUnpairedInterns(event.target.value); 
+        displayUnpairedInterns(event.target.value);
     });
 
     // If clicked outside the modal, close it
-    window.addEventListener("click", function(event) {
+    window.addEventListener("click", function (event) {
         const modal = document.getElementById("addInternModal");
         if (event.target === modal) {
             closeModal();
@@ -235,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (document.getElementById("teamsContainer")) {
-        displayPairedInterns(); 
+        displayPairedInterns();
     }
 
     // Function to generate CSV content
