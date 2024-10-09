@@ -456,9 +456,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const accPairs = [
             {
-                "Total pairs created:": totalPairs,
-                "Valid pairs based on Filters:": validPairsCount,
-                "Pairing accuracy": pairingAcc,
+                "Total_pairs_created": totalPairs,
+                "Valid_pairs_based_on_Filters": validPairsCount,
+                "Pairing_accuracy": pairingAcc,
             },
         ];
 
