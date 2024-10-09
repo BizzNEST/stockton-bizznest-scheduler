@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bizzNEST Hub Pairings</title>
     <link rel="stylesheet" href="../style/styles.css">
 </head>
+
 <body class="wrapper">
     <header>
         <div class="logoContainer">
@@ -19,7 +21,7 @@
             <button id="editButton" class="downloadButton">Edit</button>
         </div>
         <div id="teamsContainer">
-            
+
         </div>
         <div id="addInternModal" class="modal">
             <div class="modal-content">
@@ -46,7 +48,8 @@
                 <p style="margin: 0px;">Are You Sure You Want to Reset?</p>
             </div>
             <div class="containerForBodyResetModal">
-                <p style="margin: 0;">All unsaved progress will be lost, and you will be redirected to the homepage. This action cannot be undone.</p>
+                <p style="margin: 0;">All unsaved progress will be lost, and you will be redirected to the homepage.
+                    This action cannot be undone.</p>
             </div>
             <div class="containerForResetModalButtons">
                 <button class="cancelButtonStyle" id="cancelButton">Cancel</button>
@@ -54,6 +57,22 @@
             </div>
         </div>
     </div>
+
+    <div class="modalComponentBackgroundReset hidden" id="modalWarning">
+        <div class="modalComponentReset">
+            <div class="containerHeaderResetModal">
+                <p style="margin: 0px;">Warning</p>
+            </div>
+            <div class="containerForBodyResetModal">
+                <p style="margin: 0;">Due to an odd number of interns there is a group of three.</p>
+            </div>
+            <div class="containerForResetModalButtons">
+                <button class="cancelButtonStyle" id="anotherCancelButton">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <script src="../scripts/pairingapp.js"></script>
 </body>
+
 </html>

@@ -732,6 +732,10 @@ input:checked + .slider:before {
     text-decoration: none;
     cursor: pointer;
 }
+
+.resetAndSave{
+    padding: 10px;
+}
 @media (max-width: 768px) {
     .bizzNESTHeader {
         font-size: 36px;
