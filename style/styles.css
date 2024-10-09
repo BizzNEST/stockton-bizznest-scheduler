@@ -277,20 +277,20 @@ header {
     text-align: center;
     border: solid 2px #309C68;
     border-radius: 5px;
-    border-collapse: collapse;
     border-spacing: 0;
 }
 
 .tableHeaderStyling {
     font-family: Lato-Regular;
     color: white;
+    top: 0;
+    position: sticky;
 }
 
 .tableHeaderStyling th {
     background-color: #79C8A3;
-    padding: 13px; 
-    margin: 0;
-    border: none;
+    padding: 15px; 
+    margin: 0; 
 }
 
 .tableHeaderStyling th:first-child {
@@ -308,13 +308,14 @@ tbody td {
     border: 1px solid #79C8A3;
 }
 
-.tableBodyStyling td {
-    border-bottom: 1px solid transparent;
-    border-top: 1px solid transparent;
-    border-bottom-left-radius: #79C8A3;
-    border-bottom-right-radius: #79C8A3;
-    
-}
+.mergedCell div {
+    font-family: Lato-Light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}      
 
 .paginationContainer{
     display: flex;
@@ -646,9 +647,9 @@ input:checked + .slider:before {
     justify-content: center;
     max-height: 400px; 
     overflow-y: auto;
-    padding: 10px; 
     background-color: none;
-    border-radius: 10px;
+    border-radius: 0px;
+    margin: 10px;
 }
 
 .team {

@@ -21,19 +21,19 @@ document.addEventListener("DOMContentLoaded", () => {
         modalWarning.classList.add("hidden");
     })
 
-    const displayPairedInterns = () => {
+        const displayPairedInterns = () => {
         const teamsContainer = document.getElementById("teamsContainer");
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
         
         teamsContainer.innerHTML = ""; 
-
+    
         if (pairedInterns.length === 0) {
             teamsContainer.innerHTML = '<p>No pairs available</p>';
             return;
         }
-
+    
         teamsContainer.className = "teamsContainer";
-
+    
         // Create table structure
         const table = document.createElement("table");
         table.className = "mainTableContainer";
@@ -48,29 +48,36 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         thead.appendChild(headerRow);
         table.appendChild(thead);
-
+    
         const tbody = document.createElement("tbody");
         tbody.id = "tableBody";
         tbody.className = "tableBodyStyling";
-
+    
         pairedInterns.forEach((team, teamIndex) => {
-
+            const teamRow = document.createElement("tr");
+            teamRow.className = "teamRow";
+    
+            const nameCell = document.createElement("td");
+            const departmentCell = document.createElement("td");
+            const locationCell = document.createElement("td");
+    
+            nameCell.className = "mergedCell";
+            departmentCell.className = "mergedCell";
+            locationCell.className = "mergedCell";
+    
             team.forEach((intern, internIndex) => {
-                const teamMembersCell = document.createElement("tr");
-                teamMembersCell.className = "teamMembersCell";
-
-                const nameCell = document.createElement("td");
-                nameCell.innerText = intern.name;
-                teamMembersCell.appendChild(nameCell);
-
-                const departmentCell = document.createElement("td");
-                departmentCell.innerText = intern.department;
-                teamMembersCell.appendChild(departmentCell);
-
-                const locationCell = document.createElement("td");
-                locationCell.innerText = intern.location;
-                teamMembersCell.appendChild(locationCell);
-
+                const internNameDiv = document.createElement("div");
+                internNameDiv.innerText = intern.name;
+                nameCell.appendChild(internNameDiv);
+    
+                const internDepartmentDiv = document.createElement("div");
+                internDepartmentDiv.innerText = intern.department;
+                departmentCell.appendChild(internDepartmentDiv);
+    
+                const internLocationDiv = document.createElement("div");
+                internLocationDiv.innerText = intern.location;
+                locationCell.appendChild(internLocationDiv);
+    
                 if (isEditMode) {
                     const removeButton = document.createElement("button");
                     removeButton.innerText = "x";
@@ -79,38 +86,35 @@ document.addEventListener("DOMContentLoaded", () => {
                     removeButton.addEventListener("click", () => {
                         removeIntern(teamIndex, internIndex);
                     });
-
-                    nameCell.appendChild(removeButton);
-                }
-                // Check if this is the last intern in the team
-                if (internIndex === team.length - 1) {
-                    nameCell.style.borderBottom = "2px solid green";
-                    departmentCell.style.borderBottom = "2px solid green";
-                    locationCell.style.borderBottom = "2px solid green";
-                }
-
-                if (isEditMode && internIndex === 0) {
-                    const actionsCell = document.createElement("td");
-                    actionsCell.rowSpan = team.length;
-                    actionsCell.style.borderBottom = "2px solid green";
-                    
-                    const addButton = document.createElement("button");
-                    addButton.innerText = "+";
-                    addButton.style.marginTop = "10px";
-                    addButton.style.cursor = "pointer";
-                    addButton.addEventListener("click", () => {
-                        openModal(teamIndex);
-                    });
     
-                    actionsCell.appendChild(addButton);
-                    teamMembersCell.appendChild(actionsCell);
+                    internNameDiv.appendChild(removeButton);
                 }
-        
-                tbody.appendChild(teamMembersCell);
             });
-             
+    
+            teamRow.appendChild(nameCell);
+            teamRow.appendChild(departmentCell);
+            teamRow.appendChild(locationCell);
+    
+            if (isEditMode) {
+                const actionsCell = document.createElement("td");
+                actionsCell.rowSpan = 1;
+                actionsCell.className = "actionsCell";
+    
+                const addButton = document.createElement("button");
+                addButton.innerText = "+";
+                addButton.style.marginTop = "10px";
+                addButton.style.cursor = "pointer";
+                addButton.addEventListener("click", () => {
+                    openModal(teamIndex);
+                });
+    
+                actionsCell.appendChild(addButton);
+                teamRow.appendChild(actionsCell);
+            }
+    
+            tbody.appendChild(teamRow);
         });
-
+    
         table.appendChild(tbody);
         teamsContainer.appendChild(table);
     };
