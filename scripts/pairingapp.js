@@ -3,11 +3,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const cancelButton = document.getElementById("cancelButton");
     const modalResetId = document.getElementById("modalResetId");
     const resetToggle = document.getElementById("resetToggle");
+    const modalWarning = document.getElementById("modalWarning");
+    const anotherCancelButton = document.getElementById("anotherCancelButton");
 
     let teamIndexToAddIntern;
     let unpairedInterns = [];
     let isEditMode = false;
-        
+    let modalDisplayed = false;
+    const groupsOfThree = sessionStorage.getItem("groupsOfThree");
+
+    if (groupsOfThree === "1" && !modalDisplayed) {
+        modalWarning.classList.remove("hidden");
+        modalDisplayed = true;
+    }
+
+    anotherCancelButton.addEventListener("click", () => {
+        modalWarning.classList.add("hidden");
+    })
+
     const displayPairedInterns = () => {
         const teamsContainer = document.getElementById("teamsContainer");
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
