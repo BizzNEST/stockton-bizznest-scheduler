@@ -113,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 actionsCell.className = "actionsCell";
     
                 const addButton = document.createElement("button");
+                addButton.classList.add("add-button");
                 addButton.innerText = "+";
                 addButton.style.marginTop = "10px";
                 addButton.style.cursor = "pointer";
