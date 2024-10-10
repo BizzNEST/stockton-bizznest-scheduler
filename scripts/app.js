@@ -405,7 +405,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let groupsOfThree = 0;
         const departGroup = departmentSwitch.checked;
         const locationGroup = locationSwitch.checked;
-
         while (internPair.length > 1) {
             let firstIntern = internPair.splice(
                 Math.floor(Math.random() * internPair.length),
@@ -447,7 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("groupsOfThree", JSON.stringify(groupsOfThree));
 
         const totalPairs = pairs.length;
-        let accuracy = totalPairs >= 0 ? (validPairsCount / totalPairs) * 100 : 0;
+        let accuracy = totalPairs > 0 ? (validPairsCount / totalPairs) * 100 : 0;
         let pairingAcc = 0;
         if (accuracy.toFixed(2) === "0.00") {
             accuracy = 100;
@@ -465,8 +464,6 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("acc", JSON.stringify(accPairs));
     };
 
-    departmentSwitch.addEventListener("change", pairInterns);
-    locationSwitch.addEventListener("change", pairInterns);
     pairButton.addEventListener("click", () => {
         const selectedInterns =
             JSON.parse(sessionStorage.getItem("selected")) || {};
