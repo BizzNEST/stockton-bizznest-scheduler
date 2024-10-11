@@ -656,7 +656,7 @@ input:checked + .slider:before {
     overflow-y: auto;
     background-color: none;
     border-radius: 0px;
-    margin: 10px;
+    margin: 20px;
 }
 
 .team {
