@@ -407,9 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const locationGroup = locationSwitch.checked;
         while (internPair.length > 1) {
             let firstIntern = internPair.splice(
-                Math.floor(Math.random() * internPair.length),
-                1
-            )[0];
+                Math.floor(Math.random() * internPair.length), 1)[0];
             let partnerIndex = internPair.findIndex((intern) => {
                 if (departGroup && locationGroup) {
                     return (
@@ -446,11 +444,10 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("groupsOfThree", JSON.stringify(groupsOfThree));
 
         const totalPairs = pairs.length;
-        let accuracy = totalPairs > 0 ? (validPairsCount / totalPairs) * 100 : 0;
-        let pairingAcc = 0;
-        if (accuracy.toFixed(2) === "0.00") {
-            accuracy = 100;
+        if (!departGroup && !locationGroup) {
+            validPairsCount = totalPairs;
         }
+        let accuracy = totalPairs > 0 ? (validPairsCount / totalPairs) * 100 : 100;
         pairingAcc = accuracy.toFixed(2);
 
         const accPairs = [
