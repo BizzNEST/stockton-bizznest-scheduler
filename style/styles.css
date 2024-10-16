@@ -652,11 +652,12 @@ input:checked + .slider:before {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-height: 400px; 
+    max-height: 50vh;
     overflow-y: auto;
     background-color: none;
     border-radius: 0px;
-    margin: 20px;
+    margin: 10px;
+     
 }
 
 .team {
@@ -867,6 +868,9 @@ input:checked + .slider:before {
         width: 100%;
     }
 
+    .tableHeaderStyling th {
+        padding: 10px 0px; 
+    }
 }
 
 @media (max-width: 480px) {
@@ -959,6 +963,21 @@ input:checked + .slider:before {
     .saveButtonStyle {
         padding: 10px 40px;
     }
+
+    .tableHeaderStyling th {
+        padding: 10px 0px; 
+    }
+
+    .downloadButton {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+
+    tbody td {
+        font-size: 14px;
+        padding: 5px;
+    }
+    
 }
 
 @media (max-width: 375px) {
