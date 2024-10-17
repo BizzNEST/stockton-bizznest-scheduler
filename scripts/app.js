@@ -477,7 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             pairInterns();
             isPairingInitiated = false;
-            window.location.href = "/Pages/pairings.html";
+            window.location.href = "/pages/pairings.html";
         }
     });
 });
