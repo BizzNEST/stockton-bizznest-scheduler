@@ -478,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
             pairInterns();
             isPairingInitiated = false;
             const link = document.createElement('a');
-            link.href = "/pages/pairings.html";
+            link.href = "./pages/pairings.html";
             document.body.appendChild(link);
             link.click();
         }
