@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     resetButton.addEventListener("click", () => {
         sessionStorage.clear();
-        window.location.href = "./";
+        window.location.href = "/stockton-bizznest-scheduler";
     })
 
     cancelButton.addEventListener("click", () => {
