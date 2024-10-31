@@ -13,38 +13,31 @@ document.addEventListener("DOMContentLoaded", () => {
     let isEditMode = false;
     let modalDisplayed = false;
     const groupsOfThree = sessionStorage.getItem("groupsOfThree");
-    const accObject = JSON.parse(sessionStorage.getItem("acc"));
+    const accObject = JSON.parse(sessionStorage.getItem("accPairs"));
+    const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
 
-    const pTag = document.createElement("p");
-    resetAndAccContainer.classList.add("resetAndAccContainerStyle")
-    pTag.innerText = `${accObject[0].Pairing_accuracy}% Accuracy`;
-    resetAndAccContainer.appendChild(pTag);
-
-
-
-    if (groupsOfThree === "1" && !modalDisplayed) {
-        modalWarning.classList.remove("hidden");
-        modalDisplayed = true;
+    if (accObject && accObject.Pairing_accuracy) {
+        const pTag = document.createElement("p");
+        resetAndAccContainer.classList.add("resetAndAccContainerStyle")
+        pTag.innerText = `${accObject.Pairing_accuracy}% Accuracy`;
+        resetAndAccContainer.appendChild(pTag);
+    } else {
+        console.log("No accuracy data available");
     }
 
-    anotherCancelButton.addEventListener("click", () => {
-        modalWarning.classList.add("hidden");
-    })
-
-
-        const displayPairedInterns = () => {
+    const displayPairedInterns = () => {
         const teamsContainer = document.getElementById("teamsContainer");
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
-        
-        teamsContainer.innerHTML = ""; 
-    
+
+        teamsContainer.innerHTML = "";
+
         if (pairedInterns.length === 0) {
             teamsContainer.innerHTML = '<p>No pairs available</p>';
             return;
         }
-    
+
         teamsContainer.className = "teamsContainer";
-    
+
         // Create table structure
         const table = document.createElement("table");
         table.className = "mainTableContainer";
@@ -59,36 +52,36 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         thead.appendChild(headerRow);
         table.appendChild(thead);
-    
+
         const tbody = document.createElement("tbody");
         tbody.id = "tableBody";
         tbody.className = "tableBodyStyling";
-    
+
         pairedInterns.forEach((team, teamIndex) => {
             const teamRow = document.createElement("tr");
             teamRow.className = "teamRow";
-    
+
             const nameCell = document.createElement("td");
             const departmentCell = document.createElement("td");
             const locationCell = document.createElement("td");
-    
+
             nameCell.className = "mergedCell";
             departmentCell.className = "mergedCell";
             locationCell.className = "mergedCell";
-    
+
             team.forEach((intern, internIndex) => {
                 const internNameDiv = document.createElement("div");
                 internNameDiv.innerText = intern.name;
                 nameCell.appendChild(internNameDiv);
-    
+
                 const internDepartmentDiv = document.createElement("div");
                 internDepartmentDiv.innerText = intern.department;
                 departmentCell.appendChild(internDepartmentDiv);
-    
+
                 const internLocationDiv = document.createElement("div");
                 internLocationDiv.innerText = intern.location;
                 locationCell.appendChild(internLocationDiv);
-    
+
                 if (isEditMode) {
                     const removeButton = document.createElement("button");
                     removeButton.classList.add("remove-button");
@@ -98,20 +91,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     removeButton.addEventListener("click", () => {
                         removeIntern(teamIndex, internIndex);
                     });
-    
+
                     internNameDiv.appendChild(removeButton);
                 }
             });
-    
+
             teamRow.appendChild(nameCell);
             teamRow.appendChild(departmentCell);
             teamRow.appendChild(locationCell);
-    
+
             if (isEditMode) {
                 const actionsCell = document.createElement("td");
                 actionsCell.rowSpan = 1;
                 actionsCell.className = "actionsCell";
-    
+
                 const addButton = document.createElement("button");
                 addButton.classList.add("add-button");
                 addButton.innerText = "+";
@@ -120,20 +113,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 addButton.addEventListener("click", () => {
                     openModal(teamIndex);
                 });
-    
+
                 actionsCell.appendChild(addButton);
                 teamRow.appendChild(actionsCell);
             }
-    
+
             tbody.appendChild(teamRow);
         });
-    
+
         table.appendChild(tbody);
         teamsContainer.appendChild(table);
     };
 
-    if (document.getElementById("teamsContainer")) {
-        displayPairedInterns();
+    displayPairedInterns();
+
+    if (groupsOfThree === "1" && !modalDisplayed) {
+        modalWarning.classList.remove("hidden");
+        modalDisplayed = true;
     }
 
     resetButton.addEventListener("click", () => {
@@ -149,8 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
         modalResetId.classList.remove("hidden");
     })
 
-
-
+    anotherCancelButton.addEventListener("click", () => {
+        modalWarning.classList.add("hidden");
+    });
 
     const removeIntern = (teamIndex, internIndex) => {
         const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
@@ -214,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
             internDiv.innerHTML = `${intern.name} - ${intern.department} - ${intern.location}`; // Display all details
 
             internDiv.addEventListener("click", () => {
-            addNewIntern(intern); 
+                addNewIntern(intern);
             });
             unpairedList.appendChild(internDiv);
         });
@@ -252,44 +249,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    if (document.getElementById("teamsContainer")) {
-        displayPairedInterns();
-    }
-
-    // Function to generate CSV content
-    function generateCSVContent() {
-        const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
-        let csvContent = "Team Number,Intern Name,Location,Department\n"; // CSV header
-
-        pairedInterns.forEach((team, index) => {
-            const teamNumber = index + 1;
-            team.forEach(intern => {
-                const internName = intern.name;
-                const location = intern.location;
-                const department = intern.department;
-                csvContent += `${teamNumber},${internName},${location},${department}\n`;
-            });
-        });
-
-        return csvContent;
-    }
-
-    // Function to create a downloadable CSV file
-    function downloadCSV(content) {
-        const blob = new Blob([content], { type: 'text/csv' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'intern_pairs.csv';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }
-
     //event listener for the download button
-    document.getElementById('downloadButton').addEventListener('click', () => {
-        const csvContent = generateCSVContent();
-        downloadCSV(csvContent);
+    document.getElementById('downloadButton').addEventListener('click', async () => {
+        const pairedInterns = JSON.parse(sessionStorage.getItem("pairedInterns")) || [];
+        try {
+            const response = await fetch('http://localhost:8000/download-csv', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ pairedInterns })
+            });
+            if (!response.ok) throw new Error('Network response was not ok');
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'intern_pairs.csv';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        } catch (error) {
+            console.error('Error downloading CSV:', error);
+        }
     });
 });
