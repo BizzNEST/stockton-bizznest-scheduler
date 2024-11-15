@@ -1,0 +1,15 @@
+{
+  "name": "stockton-bizznest-scheduler",
+  "version": "1.0.0",
+  "description": "This project is a Randomized Scheduling Application for bizzNEST built with HTML, CSS, and JavaScript. It allows users to group and pair interns from different locations and departments based on customizable rules. Key features include intern data management, randomized scheduling, selection and filtering, rule configuration, manual overrides, edge case handling, and a responsive UI. The application is entirely frontend-based and optimized for lightweight, fast performance.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
