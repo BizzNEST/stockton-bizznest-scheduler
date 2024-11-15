@@ -15,11 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const groupsOfThree = sessionStorage.getItem("groupsOfThree");
     const accObject = JSON.parse(sessionStorage.getItem("acc"));
 
-    const pTag = document.createElement("p");
-    resetAndAccContainer.classList.add("resetAndAccContainerStyle")
-    pTag.innerText = `${accObject[0].Pairing_accuracy}% Accuracy`;
-    resetAndAccContainer.appendChild(pTag);
-
+    if (accObject && accObject.length > 0) {
+        const pTag = document.createElement("p");
+        resetAndAccContainer.classList.add("resetAndAccContainerStyle");
+        pTag.innerText = `${accObject[0].Pairing_accuracy}% Accuracy`;
+        resetAndAccContainer.appendChild(pTag);
+    }
 
 
     if (groupsOfThree === "1" && !modalDisplayed) {

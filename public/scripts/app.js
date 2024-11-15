@@ -381,101 +381,66 @@ document.addEventListener("DOMContentLoaded", () => {
         modalResetId.classList.add("hidden");
     });
 
-    const pairInterns = () => {
-        const selectedInterns =
-            JSON.parse(sessionStorage.getItem("selected")) || {};
-        const selectedIds = Object.keys(selectedInterns).filter(
-            (id) => selectedInterns[id]
-        );
-        const internPair = interns.filter((intern) =>
-            selectedIds.includes(String(intern.id))
-        );
-
+    const pairInterns = async () => {
+        const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
+        const selectedIds = Object.keys(selectedInterns).filter(id => selectedInterns[id]);
+        const internPair = interns.filter(intern => selectedIds.includes(String(intern.id)));
+    
         if (!isPairingInitiated) {
             return;
         }
-
+    
         if (internPair.length < 2) {
             modalResetId.classList.remove("hidden");
             return;
         }
-
-        let pairs = [];
-        let validPairsCount = 0;
-        let groupsOfThree = 0;
-        const departGroup = departmentSwitch.checked;
-        const locationGroup = locationSwitch.checked;
-        while (internPair.length > 1) {
-            let firstIntern = internPair.splice(
-                Math.floor(Math.random() * internPair.length), 1)[0];
-            let partnerIndex = internPair.findIndex((intern) => {
-                if (departGroup && locationGroup) {
-                    return (
-                        intern.department === firstIntern.department &&
-                        intern.location === firstIntern.location
-                    );
-                } else if (departGroup) {
-                    return intern.department === firstIntern.department;
-                } else if (locationGroup) {
-                    return intern.location === firstIntern.location;
-                }
-                return false;
+    
+        const rules = {
+            differentLocations: locationSwitch.checked,
+            differentDepartments: departmentSwitch.checked
+        };
+    
+        try {
+            
+            const response = await fetch('/api/generate-pairs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ interns: internPair, rules })
             });
-            if (partnerIndex !== -1) {
-                let secondIntern = internPair.splice(partnerIndex, 1)[0];
-                pairs.push([firstIntern, secondIntern]);
-                validPairsCount++;
-            } else {
-                let secondIndex = Math.floor(Math.random() * internPair.length);
-                let secondIntern = internPair.splice(secondIndex, 1)[0];
-                pairs.push([firstIntern, secondIntern]);
-            }
+    
+            const result = await response.json();
+            console.log('Received data:', result);
+            const { pairs, groupsOfThree, totalPairs, validPairsCount, pairingAcc } = result;
+    
+            sessionStorage.setItem("pairedInterns", JSON.stringify(pairs));
+            sessionStorage.setItem("groupsOfThree", JSON.stringify(groupsOfThree));
+    
+            const accPairs = [
+                {
+                    "Total_pairs_created": totalPairs,
+                    "Valid_pairs_based_on_Filters": validPairsCount,
+                    "Pairing_accuracy": pairingAcc,
+                },
+            ];
+    
+            sessionStorage.setItem("acc", JSON.stringify(accPairs));
+        } catch (error) {
+            console.error('Error generating pairs:', error);
         }
-        if (internPair.length === 1) {
-            const unpairedIntern = internPair[0];
-            if (pairs.length > 0) {
-                pairs[pairs.length - 1].push(unpairedIntern);
-                groupsOfThree++;
-            } else {
-                pairs.push([unpairedIntern]);
-            }
-        }
-        sessionStorage.setItem("pairedInterns", JSON.stringify(pairs));
-        sessionStorage.setItem("groupsOfThree", JSON.stringify(groupsOfThree));
-
-        const totalPairs = pairs.length;
-        if (!departGroup && !locationGroup) {
-            validPairsCount = totalPairs;
-        }
-        let accuracy = totalPairs > 0 ? (validPairsCount / totalPairs) * 100 : 100;
-        pairingAcc = accuracy.toFixed(2);
-
-        const accPairs = [
-            {
-                "Total_pairs_created": totalPairs,
-                "Valid_pairs_based_on_Filters": validPairsCount,
-                "Pairing_accuracy": pairingAcc,
-            },
-        ];
-
-        sessionStorage.setItem("acc", JSON.stringify(accPairs));
     };
 
-    pairButton.addEventListener("click", () => {
-        const selectedInterns =
-            JSON.parse(sessionStorage.getItem("selected")) || {};
-        const selectedIds = Object.keys(selectedInterns).filter(
-            (id) => selectedInterns[id]
-        );
-        const internPair = interns.filter((intern) =>
-            selectedIds.includes(String(intern.id))
-        );
+    pairButton.addEventListener("click", async () => {
+        const selectedInterns = JSON.parse(sessionStorage.getItem("selected")) || {};
+        const selectedIds = Object.keys(selectedInterns).filter(id => selectedInterns[id]);
+        const internPair = interns.filter(intern => selectedIds.includes(String(intern.id)));
         isPairingInitiated = true;
         if (internPair.length < 2) {
             modalResetId.classList.remove("hidden");
             return;
         } else {
-            pairInterns();
+            await pairInterns();
             isPairingInitiated = false;
             const link = document.createElement('a');
             link.href = "./pages/pairings.html";
