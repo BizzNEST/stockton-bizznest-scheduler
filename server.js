@@ -10,14 +10,6 @@ app.use(express.json());
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// API endpoint example
-app.get('/api/interns', (req, res) => {
-    res.json([
-        { id: 1, name: 'John Doe', department: 'Engineering', location: 'New York' },
-        { id: 2, name: 'Jane Smith', department: 'Marketing', location: 'San Francisco' }
-    ]);
-});
-
 // Function to generate pairs
 function generatePairs(interns, rules) {
     let pairs = [];
@@ -89,6 +81,52 @@ app.post('/api/generate-pairs', (req, res) => {
 
     const result = generatePairs(interns, appliedRules);
     res.json(result);
+});
+
+function generateCSVContent(pairs) {
+    let csvContent = "Team Number,Intern Name,Location,Department\n"; // CSV header
+
+    pairs.forEach((team, index) => {
+        const teamNumber = index + 1;
+        team.forEach(intern => {
+            const internName = intern.name;
+            const location = intern.location;
+            const department = intern.department;
+            csvContent += `${teamNumber},${internName},${location},${department}\n`;
+        });
+    });
+
+    return csvContent;
+}
+
+const fs = require('fs');
+
+app.get('/api/export-pairs', (req, res) => {
+    const format = req.query.format || 'json';
+    const pairs = JSON.parse(req.query.pairs || '[]');
+
+    if (format === 'csv') {
+        const csvContent = generateCSVContent(pairs);
+        const filePath = path.join(__dirname, 'public', 'intern_pairs.csv');
+        fs.writeFileSync(filePath, csvContent);
+        res.download(filePath, 'intern_pairs.csv', (err) => {
+            if (err) {
+                console.error('Error downloading CSV file:', err);
+                res.status(500).send('Error downloading CSV file');
+            }
+            fs.unlinkSync(filePath); // Delete the file after download
+        });
+    } else {
+        const filePath = path.join(__dirname, 'public', 'intern_pairs.json');
+        fs.writeFileSync(filePath, JSON.stringify(pairs, null, 2));
+        res.download(filePath, 'intern_pairs.json', (err) => {
+            if (err) {
+                console.error('Error downloading JSON file:', err);
+                res.status(500).send('Error downloading JSON file');
+            }
+            fs.unlinkSync(filePath); // Delete the file after download
+        });
+    }
 });
 
 app.listen(PORT, () => {
